@@ -1,4 +1,0 @@
-Flask
-discord==0.0.2
-asyncio==3.4.3
-

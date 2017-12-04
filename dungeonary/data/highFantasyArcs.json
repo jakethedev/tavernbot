@@ -1,0 +1,126 @@
+{
+  "normal_places" : [
+    "a backalley",
+    "the market district",
+    "the road out of town",
+    "the shop",
+    "the tavern",
+    "their quarters",
+    "town hall"
+  ],
+  "npc_events": [
+    "greets the party",
+    "has a messenger deliver a summons to the party",
+    "limps briskly up to the party",
+    "quietly motions for the party to follow, then turns and sneaks away",
+    "runs up to the party",
+    "sends for the party by raven",
+    "stumbles in behind them mortally wounded"
+  ],
+  "npcs": [
+    "family member",
+    "farmer",
+    "foreign ranger",
+    "holy man",
+    "hooded traveller",
+    "known key NPC",
+    "local bartender",
+    "local shopkeep",
+    "longtime friend",
+    "member of local leadership",
+    "priestess",
+    "raving madman",
+    "renowned warrior",
+    "retired adventurer",
+    "royal arcanist",
+    "soldier's widow",
+    "soldier's widower",
+    "unknown key NPC",
+    "wearied traveller"
+  ],
+  "villainTypes": [
+    "fey",
+    "dragon",
+    "warlord"
+  ],
+  "villains": {
+    "fey": {
+      "name": "mysterious fey",
+      "events": [
+        "there's been a series of attacks by feywild beasts on the material plane",
+        "a mad archfey conjured a brilliant rainbow overhead that is beginning to rain fire"
+      ],
+      "consequences": [
+        "fey0",
+        "fey1",
+        "fey2",
+        "fey3",
+        "fey4",
+        "fey5",
+        "fey6",
+        "fey7",
+        "fey8",
+        "fey9"
+      ]
+    },
+    "dragon": {
+      "name": "mighty dragon",
+      "events": [
+        "a dragon razed a nearby village",
+        "a mother dragon was teaching her young to hunt by preying on local livestock and farmers"
+      ],
+      "consequences": [
+        "dragon0",
+        "dragon1",
+        "dragon2",
+        "dragon3",
+        "dragon4",
+        "dragon5",
+        "dragon6",
+        "dragon7",
+        "dragon8",
+        "dragon9"
+      ]
+    },
+    "warlord": {
+      "name": "dangerous warlord",
+      "events": [
+        "a warlord has taken a nearby village",
+        "a vicious warmonger has threatened the capitol and plans to take it",
+        "the long-forgotten barbarian warchief of the wastes is kindling a war"
+      ],
+      "consequences": [
+        "warlord0",
+        "warlord1",
+        "warlord2",
+        "warlord3",
+        "warlord4",
+        "warlord5",
+        "warlord6",
+        "warlord7",
+        "warlord8",
+        "warlord9"
+      ]
+    }
+  },
+  "wild_places": [
+    "deep into the earth through a recently torn chasm",
+    "into the deep woods",
+    "into the frozen wastes of the north",
+    "straight up into the sky",
+    "to the dense jungles of the tropics",
+    "to the nearby mountains",
+    "to the river",
+    "towards the ocean"
+  ],
+  "compass": [
+    "north",
+    "northwest",
+    "west",
+    "southwest",
+    "south",
+    "southeast",
+    "east",
+    "northeast"
+  ]
+}

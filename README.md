@@ -1,49 +1,43 @@
-# DungeonBot
+# TavernBot - The Ultimate RPG Discord Bot for D&D, Pathfinder, and beyond!
+### [Ideas and Suggestions Welcome!](https://github.com/jakethedev/tavernbot/issues)
 
-A generator bot for Game Masters of D&D. Multiple run modes include 
-a flask API (WIP), a discord bot (WIP), and a CLI for 'that' GM (aka me).
+The idea: Wouldn't it be hella dope to have a really good D&D bot for discord? I think so. And this is the start of that solution.
+
+TavernBot is a generator bot for Game Masters of D&D. This project is a Discord bot wrapper for the [Dungeonary](https://www.npmjs.com/package/dungeonary), and several other useful discord functions such as roles and eventually music/ambience in a voice channel.
+
+This is currently an 0.x release - I will document features and such here as they're finished up and as we close in on 1.0, but for now, I'm pouring molten free time into this project to try and forge something awesome. Check the code for now if you want to know more.
+
+### Notable issues:
+
+#### ImportError: no module compiler.ast:
+
+If you see the above issue during 'npm install', just run 'sudo apt install python-dev'. I'm as upset as you are that we need python for npm, but, c'est la vie.
+
+Below is a sort of notepad, and generally contains nothing useful. If you have ideas or features that you think this bot should support, [let me know on Github](https://github.com/jakethedev/tavernbot/issues) and we'll get it prioritized :D
 
 ---
 
-## Notes from before:
+Source for dungeon world content: https://www.npmjs.com/package/dungeonworld-data
 
-Need to implement this:
-https://github.com/Rapptz/discord.py#discordpy
+#### Additional Notes:Discord Bot Thoughts and Ideas
+Throttle max rolls to 100. If more, mutiply to match and throw another 100 on it.
+Cap dice types at 5 instances of 'd'? "Error: Too complex"?
+I want to roll this '1d20 + 5, 2d6 + 2d8 + 3'
 
-This bot is twinkle in the eye of a bud of a work in progress.
+Voice API https://discord.js.org/#/docs/main/stable/topics/voice
 
-But the idea is that is would be hella dope to have a D&D bot for discord, yeah?
+Character stats implementations
+- PHB spread w/stat priority per class
+- 4d6k3
+- Colville method
+- 6 + 2d6
 
-I think so. So here's an attempt at building that.
- 
-# Todo List ('scuse the shorthand)
+Keep last 128 macros? 256?
 
-Main Func
-- Run script for bot
-- Run script for server
-  - Combine?
-- local main, enum param for what to make
-  - enum: adventure, quest, hook, bbeg, bg, npc, party
+Find a good base of Character Sheet JSON
 
-Major Tasks
-- Hook randomizing
-  - Fall into dungeon
-  - Witness crime
-  - Npc informant found out defector
-- Villain and subvillains
-  - Create subvillain generation
-  - Have 2-3 allies for main villain
-- Creating NPC/PC 
-  - class+spec (title only, no powers)
-  - race+sub (include stat mods)
-  - background from table
-  - profs
-  - stats
-  - 2 knives by default
-    - Knife table
-- Create party
-  - param: size, stats=random,spread
-  - gen (size) pc's, roll/spread stats
-  - size-1 bonds for each pc
-    - set up a bond table to roll on
+Possibly useful for inspiration https://github.com/opendnd
+
+
+
 

@@ -30,7 +30,10 @@ Major Features
 - Character Sheet JSON 
 
 Might be good to steal from https://github.com/opendnd
-Great dice roller: https://github.com/NickMele/node-dice/blob/master/dice.js
+Great dice roller: https://github.com/NickMele/node-dice
+Other sources:
+  https://github.com/jhamlet/dice-js
+  https://github.com/thebinarypenguin/droll
 
 Code from Slack-dnd that might help parser:
 if(parsed.pathname === '/roll'){

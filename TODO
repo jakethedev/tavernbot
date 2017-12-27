@@ -11,7 +11,7 @@ Good Practices
 Major Features
 - Structure such that all functionality can be reused in web
 --  NPM script to minify/pack it for static blog page
-- Roll parser
+- Roll parser: Using 'droll' is probably solid
 --  Throttle max rolls to 100. If more, mutiply to match and throw another 100 on it.
 --  Cap dice types at 5 instances of 'd'? "Error: Too complex"?
 - Adventure Generator (ofign code?)

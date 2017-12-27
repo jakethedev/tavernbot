@@ -1,0 +1,32 @@
+{
+  "name": "dungeonbot",
+  "version": "0.1.0",
+  "description": "A D&D bot for discord, written in Node",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakerunsdnd/dungeonbot"
+  },
+  "keywords": [
+    "tabletop",
+    "dnd",
+    "d&d",
+    "rpg",
+    "dice",
+    "roller",
+    "character",
+    "npc",
+    "generator",
+    "discord",
+    "bot"
+  ],
+  "author": "JakeRunsDnD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jakerunsdnd/dungeonbot/issues"
+  },
+  "homepage": "https://github.com/jakerunsdnd/dungeonbot#readme"
+}

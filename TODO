@@ -8,6 +8,8 @@ Basics
 --  Cap dice types at 5 instances of 'd'? "Error: Too complex"?
 --  I want to roll this '1d20 + 5, 2d6 + 2d8 + 3'
 
+LOOK UP https://discord.js.org/#/docs/main/stable/topics/voice
+
 Good Practices
 - package.json for sanity
 - Build out functionality as an npm project?

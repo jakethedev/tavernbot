@@ -1,6 +1,5 @@
 {
-  todo: 'figure out what goes here',
-  server: 'discord-server-name',
-  channel: 'prefferred channel',
-  token: 'keep it secret, keep it safe'
+  "token": "keep it secret, keep it safe",
+  "botkey": "!",
+  "channel": "preferred channel"
 }

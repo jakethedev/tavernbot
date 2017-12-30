@@ -45,9 +45,10 @@
   ],
   "villains": {
     "fey": {
-      "name": "mysterious fey creature",
+      "name": "mysterious fey",
       "events": [
-        "there's been a series of attacks by feywild beasts on the material plane"
+        "there's been a series of attacks by feywild beasts on the material plane",
+        "a mad archfey conjured a brilliant rainbow overhead that is beginning to rain fire"
       ],
       "consequences": [
         "fey0",
@@ -106,7 +107,7 @@
     "deep into the earth through a recently torn chasm",
     "into the deep woods",
     "into the frozen wastes of the north",
-    "straight into the sky until it vanished",
+    "straight up into the sky",
     "to the dense jungles of the tropics",
     "to the nearby mountains",
     "to the river",

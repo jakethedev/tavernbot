@@ -1,6 +1,7 @@
 //All the custom stuff, loaded as global functions. i.e. d20() is now global. Like it should be.
 require('./lib/dicelib')
 require('./lib/roleslib')
+require('./lib/hooklib')
 
 /**
  *     TODO
@@ -18,7 +19,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  // msg = { "content": "!d 13223", "author": { "bot": false }, "reply": console.log }; //Test item, do not use
+  // msg = { "content": "!adventure", "author": { "bot": false }, "reply": console.log }; //Test item, do not use
 
   //Verify that we care, and that we're not making ourselves care
   if ( msg.content.startsWith(config.botkey) && (!msg.author.bot) ){
@@ -48,8 +49,8 @@ client.on('message', msg => {
       msg.reply( removeRole(client, msg.author, input) );
     } else if ( cmd == 'members' && input ) {
       msg.reply( listUsersInRole(client, input) );
-    } else if ( cmd == 'ping' ) {
-      msg.reply('Pong!');
+    } else if ( cmd == 'adventure' ) {
+      msg.reply(generateAdventure(false));
     }
   }
 });

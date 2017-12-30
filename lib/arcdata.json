@@ -47,7 +47,7 @@
     "fey": {
       "name": "mysterious fey creature",
       "events": [
-        "a fey-like series of monster attacks on the material plane"
+        "there's been a series of attacks by feywild beasts on the material plane"
       ],
       "consequences": [
         "fey0",
@@ -85,7 +85,8 @@
       "name": "dangerous warlord",
       "events": [
         "a warlord has taken a nearby village",
-        "a vicious warmonger has threatened the capitol and plans to take it"
+        "a vicious warmonger has threatened the capitol and plans to take it",
+        "the long-forgotten barbarian warchief of the wastes is kindling a war"
       ],
       "consequences": [
         "warlord0",

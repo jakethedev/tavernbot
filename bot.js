@@ -31,8 +31,8 @@ client.on('message', msg => {
     //Remove botkey and break it up into clean pieces
     let parts = msg.content.trim().substring(1).split(/\s+/);
     let cmd = parts[0];
-    let input = parts[1] || null;  //Some cmds are just the cmd
-
+    let input = parts.slice(1);
+    if (input === []) input = null; //Some cmds are just the cmd
     //From here, we're just using dicelib/roleslib/etc functions
     console.log( msg.author.username +' requested ['+cmd+'] for input ['+input+']');
     if ( cmd == 'roll' ) {

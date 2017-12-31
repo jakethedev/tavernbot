@@ -3,34 +3,41 @@
 A generator bot for Game Masters of D&D. Multiple run modes include 
 a flask API (WIP), a discord bot (WIP), and a CLI for 'that' GM (aka me).
 
----
-
-## Notes from before:
-
-Need to implement this:
-https://github.com/Rapptz/discord.py#discordpy
-
 This bot is twinkle in the eye of a bud of a work in progress.
 
 But the idea is that is would be hella dope to have a D&D bot for discord, yeah?
 
 I think so. So here's an attempt at building that.
  
-# Todo List ('scuse the shorthand)
+## Todo List in JakeShorthand(TM)
 
+Key: - todo, > in progress, X done, ? maybe
+
+```
 Main Func
-- Run script for bot
+X Run script for bot
 - Run script for server
-  - Combine?
+  ? Combine?
 - local main, enum param for what to make
-  - enum: adventure, quest, hook, bbeg, bg, npc, party
+  > enum: adventure, quest, hook, bbeg, bg, npc, party, addrole, listroles, removerole, listallinrole
 
 Major Tasks
-- Hook randomizing
+> Dice roller
+  X Basic dice function for arbitrary dice sides
+  - Dice query parser for + and - and varied dice
+    - Addition/subtraction
+    - Comma sep chunks reported as separate rolls
+    ? macros
+> Role management
+  - Add role
+  - Remove role
+  - List roles for user
+  - List users with role
+> Hook randomizing
   - Fall into dungeon
   - Witness crime
   - Npc informant found out defector
-- Villain and subvillains
+> Villain and subvillains
   - Create subvillain generation
   - Have 2-3 allies for main villain
 - Creating NPC/PC 
@@ -46,6 +53,6 @@ Major Tasks
   - gen (size) pc's, roll/spread stats
   - size-1 bonds for each pc
     - set up a bond table to roll on
-
+```
 
 

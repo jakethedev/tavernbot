@@ -1,7 +1,9 @@
 //All the custom stuff, loaded as global functions for pragmatism
-require('./lib/dicelib')
-require('./lib/roleslib')
-require('./lib/hooklib')
+require('./lib/adventuregen')
+require('./lib/beastiary')
+require('./lib/diceroller')
+require('./lib/discordroles')
+require('./lib/spellbook')
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -54,8 +56,8 @@ client.on('message', msg => {
       msg.reply( removeRole(client, msg.author, input) );
     } else if ( cmd == 'members' && input ) {
       msg.reply( listUsersInRole(client, input) );
-    } else if ( cmd == 'rpghook' ) {
-      msg.reply(generateAdventure(false));
+    } else if ( cmd == 'hook' ) {
+      msg.reply( generateAdventure(input) );
     }
   }
 });

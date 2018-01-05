@@ -25,17 +25,16 @@ client.on('ready', () => {
 client.on('message', msg => {
 
   // This is a test msg, leave commented out for bot usages
-  // msg = { "content": "!hook", "author": { }, "reply": console.log, "channel": { "name": "golemworks" } };
+  // msg = { "content": "!hook low", "author": { 'username': "TEST INPUT" }, "reply": console.log, "channel": { "name": "golemworks" } };
 
   // Let's hook it up for a default channel and DMs
   if ( msg.channel.name == config.defaultChannel || msg.channel.recipient ){
     //Make sure we care, and that we're not making ourselves care
     if ( !msg.content.trim().startsWith(config.botkey) || msg.author.bot) return;
-    //Remove botkey and break it up into clean pieces
+    //Remove botkey and break it up into clean parts.
     let parts = msg.content.trim().substring(1).split(/\s+/);
     let cmd = parts[0];
-    let input = parts.slice(1);
-    if (input === []) input = null; //Some cmds are just the cmd
+    let input = parts[1] ? parts.slice(1).join(' ') : null; //Some cmds have no input, this lets us use if(input)
     //From here, we're just using dicelib/roleslib/etc functions
     console.log( msg.author.username +' requested ['+cmd+'] for input ['+input+']');
     if ( cmd == 'roll' ) {
@@ -64,7 +63,7 @@ client.on('message', msg => {
       msg.reply( adventuregen.generate(input) );
     }
   }
-// });
+});
 
 // Turning the key and revving the bot engine
 console.log('Rolling initiative...');

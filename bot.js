@@ -47,7 +47,10 @@ client.on('message', msg => {
       msg.reply( "the botcoin landed on " + coin() );
     } else if ( cmd == 'd' && input && parseInt(input) ) {
       let diceSize = parseInt(input);
-      msg.reply( "your custom die rolls a " + d(diceSize) );
+      if (isNaN(diceSize) || diceSize < 2 ){
+        return "You get a nat 1, because that's not a valid dice size."
+      }
+      msg.reply( "Your custom die rolls a " + d(diceSize) );
     } else if ( cmd == 'rank' && input ) {
       msg.reply( addRole(client, msg.author, input) );
     } else if ( cmd == 'ranks' ) {

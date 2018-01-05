@@ -1,10 +1,13 @@
 {
   "name": "dungeonbot",
   "version": "0.1.0",
-  "description": "A D&D bot for discord, written in Node",
+  "description": "A D&D bot for discord, written in Node. This bot supports common tabletop RPG functionality and more",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bot": "node bot.js",
+    "test": "node test.js",
+    "serve": "echo Not supported, implement an api first and we'll talk",
+    "build": "echo Placeholder text for smushing libs into an rpgapp.js for web page usage"
   },
   "repository": {
     "type": "git",

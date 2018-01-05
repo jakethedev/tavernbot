@@ -31,8 +31,8 @@ client.on('message', msg => {
   if ( msg.channel.name == config.defaultChannel || msg.channel.recipient ){
     //Make sure we care, and that we're not making ourselves care
     if ( !msg.content.trim().startsWith(config.botkey) || msg.author.bot) return;
-    //Remove botkey and break it up into clean parts.
-    let parts = msg.content.trim().substring(1).split(/\s+/);
+    //Remove botkey and break it up into clean not-mixed-cased parts.
+    let parts = msg.content.trim().toLowerCase().substring(1).split(/\s+/);
     let cmd = parts[0];
     let input = parts[1] ? parts.slice(1).join(' ') : null; //Some cmds have no input, this lets us use if(input)
     //From here, we're just using dicelib/roleslib/etc functions

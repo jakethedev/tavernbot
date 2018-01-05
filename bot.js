@@ -22,17 +22,15 @@ client.on('ready', () => {
 });
 
 // Command central
-// client.on('message', msg => {
+client.on('message', msg => {
 
-  //This is a test msg, leave commented out for bot usages
-  msg = { "content": "!roll", "author": { "bot": false }, "reply": console.log, "channel": { "name": "golemworks" } };
+  // This is a test msg, leave commented out for bot usages
+  // msg = { "content": "!hook", "author": { }, "reply": console.log, "channel": { "name": "golemworks" } };
 
   // Let's hook it up for a default channel and DMs
   if ( msg.channel.name == config.defaultChannel || msg.channel.recipient ){
     //Make sure we care, and that we're not making ourselves care
-    msg.reply(msg);
     if ( !msg.content.trim().startsWith(config.botkey) || msg.author.bot) return;
-
     //Remove botkey and break it up into clean pieces
     let parts = msg.content.trim().substring(1).split(/\s+/);
     let cmd = parts[0];
@@ -41,7 +39,7 @@ client.on('ready', () => {
     //From here, we're just using dicelib/roleslib/etc functions
     console.log( msg.author.username +' requested ['+cmd+'] for input ['+input+']');
     if ( cmd == 'roll' ) {
-      if ( input ){
+      if ( input ){ //TODO This is buggy, fixme
         msg.reply( diceroller.customRoll(input) );
       } else {
         msg.reply('a d20 skitters across the table, you rolled a ' + diceroller.d(20) );
@@ -63,7 +61,7 @@ client.on('ready', () => {
     } else if ( cmd == 'members' && input ) {
       msg.reply( discordroles.listUsersInRole(client, input) );
     } else if ( cmd == 'hook' ) {
-      msg.reply( adventuregen.generateAdventure(input) );
+      msg.reply( adventuregen.generate(input) );
     }
   }
 // });

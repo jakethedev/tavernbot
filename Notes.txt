@@ -1,12 +1,8 @@
-Discord Bot in Node Tasklist
-----------------------------
-Basics
-- Discord.js client
---  Token, etc
-- Roll parser: Using 'droll' is probably solid
---  Throttle max rolls to 100. If more, mutiply to match and throw another 100 on it.
---  Cap dice types at 5 instances of 'd'? "Error: Too complex"?
---  I want to roll this '1d20 + 5, 2d6 + 2d8 + 3'
+Discord Bot Thoughts and Ideas 
+------------------------------
+Throttle max rolls to 100. If more, mutiply to match and throw another 100 on it.
+Cap dice types at 5 instances of 'd'? "Error: Too complex"?
+I want to roll this '1d20 + 5, 2d6 + 2d8 + 3'
 
 LOOK UP https://discord.js.org/#/docs/main/stable/topics/voice
 
@@ -14,23 +10,14 @@ Good Practices
 - package.json for sanity
 - Build out functionality as an npm project?
 
-Major Features
-- Structure such that all functionality can be reused in web
---  NPM script to minify/pack it for static blog page
-- Adventure Generator (ofign code?)
-- Character generator
-- Funnel Character generator
---  PHB spread w/stat priority per class
---  4d6k3
---  Colville method
---  6 + 2d6
-- NPC generator
-- bind skills: 
-    .set atk1 1d20+5,1d6+3 //Sets atk1 as a command for sender
-    .atk1 //Rolls the appropriate macro, sets time last used?
---  Wipe all macros unused over 6 hours?
-- OGL Monster JSON for lookup
-- Character Sheet JSON 
+Funnel Character generator
+- PHB spread w/stat priority per class
+- 4d6k3
+- Colville method
+- 6 + 2d6
+
+Keep last 128 macros?
+Find a good base of Character Sheet JSON 
 
 Might be good to steal from https://github.com/opendnd
 Great dice roller: https://github.com/NickMele/node-dice

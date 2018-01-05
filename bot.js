@@ -24,6 +24,19 @@ client.on('ready', () => {
 // Command central
 client.on('message', msg => {
 
+  //TODO Figure out how to utilize this to clean up this cludge
+  //  This would allow a safe, effective way to exec what the user
+  //  asked for, and it would make it far easier to implement new
+  //  functions and libs, as long as we can slam all imports together
+  //  into one lib.
+  //
+  //const dice = require('./lib/diceroller')
+  //for (cmd in dice){ 
+  //  if (cmd == 'd'){ 
+  //    console.log(dice[key](20)); 
+  //  } 
+  //}
+
   // This is a test msg, leave commented out for bot usages
   // msg = { "content": "!hook low", "author": { 'username': "TEST INPUT" }, "reply": console.log, "channel": { "name": "golemworks" } };
 

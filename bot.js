@@ -1,9 +1,9 @@
-//All the custom stuff, loaded as global functions for pragmatism
-require('./lib/adventuregen')
-require('./lib/beastiary')
-require('./lib/diceroller')
-require('./lib/discordroles')
-require('./lib/spellbook')
+//All the custom stuff, this might be one library eventually
+const adventuregen = require('./lib/adventuregen')
+const beastiary = require('./lib/beastiary')
+const diceroller = require('./lib/diceroller')
+const discordroles = require('./lib/discordroles')
+const spellbook = require('./lib/spellbook')
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -22,12 +22,15 @@ client.on('ready', () => {
 });
 
 // Command central
-client.on('message', msg => {
-  // msg = { "content": "!adventure", "author": { "bot": false }, "reply": console.log }; //Test item, do not use
+// client.on('message', msg => {
+
+  //This is a test msg, leave commented out for bot usages
+  msg = { "content": "!roll", "author": { "bot": false }, "reply": console.log, "channel": { "name": "golemworks" } };
 
   // Let's hook it up for a default channel and DMs
   if ( msg.channel.name == config.defaultChannel || msg.channel.recipient ){
     //Make sure we care, and that we're not making ourselves care
+    msg.reply(msg);
     if ( !msg.content.trim().startsWith(config.botkey) || msg.author.bot) return;
 
     //Remove botkey and break it up into clean pieces
@@ -39,31 +42,31 @@ client.on('message', msg => {
     console.log( msg.author.username +' requested ['+cmd+'] for input ['+input+']');
     if ( cmd == 'roll' ) {
       if ( input ){
-        msg.reply( customRoll(input) );
+        msg.reply( diceroller.customRoll(input) );
       } else {
-        msg.reply('a d20 skitters across the table, you rolled a ' + d(20) );
+        msg.reply('a d20 skitters across the table, you rolled a ' + diceroller.d(20) );
       }
     } else if ( cmd == 'coin' ) {
-      msg.reply( "the botcoin landed on " + coin() );
+      msg.reply( "the botcoin landed on " + diceroller.coin() );
     } else if ( cmd == 'd' && input && parseInt(input) ) {
       let diceSize = parseInt(input);
       if (isNaN(diceSize) || diceSize < 2 ){
         return "You get a nat 1, because that's not a valid dice size."
       }
-      msg.reply( "Your custom die rolls a " + d(diceSize) );
+      msg.reply( "Your custom die rolls a " + diceroller.d(diceSize) );
     } else if ( cmd == 'rank' && input ) {
-      msg.reply( addRole(client, msg.author, input) );
+      msg.reply( discordroles.addRole(client, msg.author, input) );
     } else if ( cmd == 'ranks' ) {
-      msg.reply( listRoles(client, msg.author, input) );
+      msg.reply( discordroles.listRoles(client, msg.author, input) );
     } else if ( cmd == 'remove' && input ) {
-      msg.reply( removeRole(client, msg.author, input) );
+      msg.reply( discordroles.removeRole(client, msg.author, input) );
     } else if ( cmd == 'members' && input ) {
-      msg.reply( listUsersInRole(client, input) );
+      msg.reply( discordroles.listUsersInRole(client, input) );
     } else if ( cmd == 'hook' ) {
-      msg.reply( generateAdventure(input) );
+      msg.reply( adventuregen.generateAdventure(input) );
     }
   }
-});
+// });
 
 // Turning the key and revving the bot engine
 console.log('Rolling initiative...');

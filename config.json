@@ -1,5 +1,5 @@
 {
   "token": "keep it secret, keep it safe",
   "botkey": "!",
-  "channel": "preferred channel"
+  "defaultChannel": "preferred channel"
 }

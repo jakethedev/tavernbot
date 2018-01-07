@@ -7,7 +7,7 @@ const spellbook = require('./lib/spellbook')
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const config = require("./config.json"); // Should contain token and botkey, a character that prefixes commands
+const { token, botkey, defaultChannel, gameStatus } = require("./config.json");
 
 // In case something happens, we'll want to see logs
 client.on("error", (e) => console.error(e));
@@ -17,7 +17,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setPresence({
     "status":"online",
-    "game": { "name" : config.gameStatus }
+    "game": { "name" : gameStatus }
   });
 });
 
@@ -31,19 +31,19 @@ client.on('message', msg => {
   //  into one lib.
   //
   //const dice = require('./lib/diceroller')
-  //for (cmd in dice){ 
-  //  if (cmd == 'd'){ 
-  //    console.log(dice[key](20)); 
-  //  } 
+  //for (cmd in dice){
+  //  if (cmd == 'd'){
+  //    console.log(dice[key](20));
+  //  }
   //}
 
   // This is a test msg, leave commented out for bot usages
   // msg = { "content": "!hook low", "author": { 'username': "TEST INPUT" }, "reply": console.log, "channel": { "name": "golemworks" } };
 
   // Let's hook it up for a default channel and DMs
-  if ( msg.channel.name == config.defaultChannel || msg.channel.recipient ){
+  if ( msg.channel.name == defaultChannel || msg.channel.recipient ){
     //Make sure we care, and that we're not making ourselves care
-    if ( !msg.content.trim().startsWith(config.botkey) || msg.author.bot) return;
+    if ( !msg.content.trim().startsWith(botkey) || msg.author.bot) return;
     //Remove botkey and break it up into clean not-mixed-cased parts.
     let parts = msg.content.trim().toLowerCase().substring(1).split(/\s+/);
     let cmd = parts[0];
@@ -80,4 +80,4 @@ client.on('message', msg => {
 
 // Turning the key and revving the bot engine
 console.log('Rolling initiative...');
-client.login(config.token);
+client.login(token);

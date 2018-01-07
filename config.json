@@ -1,5 +1,6 @@
 {
   "token": "keep it secret, keep it safe",
   "botkey": "!",
-  "defaultChannel": "preferred channel"
+  "defaultChannel": "golemworks",
+  "gameStatus": "several RPGs at once"
 }

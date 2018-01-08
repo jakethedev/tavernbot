@@ -15,11 +15,8 @@ shuffle = function(array) {
 }
 
 /****************************
-*
 * Start of the generators
-*
 ****************************/
-
 genHighFantasy = function(){
   let data = highFantasyData;
   //Pick the actual stuff from the randomized input
@@ -75,9 +72,7 @@ genCyberpunk = function() {
 }
 
 /****************************
-*
 * End of the Generators
-*
 ****************************/
 
 
@@ -94,7 +89,7 @@ const validSettings = {
 
 // Default to high fantasy hooks, and prefix-search validSettings for the right generator.
 // So the user doesn't have to type '!cmd highfantasy' every time, just '!cmd hi'
-exports.generate = function(setting = 'highfantasy'){
+exports.rpghook = function(setting = 'highfantasy'){
   const validSettingNames = Object.keys(validSettings);
   let firstMatch = validSettingNames.filter((name) => name.startsWith(setting))[0]
   if (!firstMatch || !validSettings[firstMatch]){
@@ -103,5 +98,3 @@ exports.generate = function(setting = 'highfantasy'){
   }
   return validSettings[firstMatch](); //Fingers crossed
 }
-
-console.log('adventuregen loaded!');

@@ -10,15 +10,15 @@ exports.coin = function(){
 }
 
 // The crazy custom roll parser.
-exports.customRoll = function(rollInput, player) {
-  let response = 'Rolling ' + rollInput + '...';
+exports.roll = function(rollInput) {
+  let response = '\n';
   for ( rollSegment of rollInput.split(',') ) {
-    //This should add results to 'response' as it goes
+    //Smash response together with each result
     let sum = 0
-    let output = `Rolling ${rollInput} for ${player}:`
     for ( rollComponent of rollSegment.split('+') ) {
-      console.log(rollComponent);
+      // console.log(rollComponent);
     }
+    response += `Results for ${rollInput}: ${sum}\n`
   }
   /**
    * Milestones:
@@ -34,5 +34,3 @@ exports.customRoll = function(rollInput, player) {
    */
   return 'This was a triumph'; // TODO: Parse input, roll dice, return reasonable output chunk
 }
-
-console.log('dicelib loaded!')

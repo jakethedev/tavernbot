@@ -1,0 +1,38 @@
+{
+  "name": "tavernlib",
+  "version": "0.1.0",
+  "description": "D&D and tabletop RPG library for rolling dice, generating adventures, making characters, searching 5e and PF SRD for monsters and spells, and anything else that might come in handy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JakeRunsDnD/dungeonbot.git"
+  },
+  "keywords": [
+    "D&D",
+    "dungeons",
+    "and",
+    "dragons",
+    "tavern",
+    "character",
+    "adventure",
+    "generation",
+    "monster",
+    "spell",
+    "SRD",
+    "lookup",
+    "dice",
+    "roller",
+    "tabletop",
+    "RPG",
+    "utility"
+  ],
+  "author": "@JakeRunsDnD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JakeRunsDnD/dungeonbot/issues"
+  },
+  "homepage": "https://github.com/JakeRunsDnD/dungeonbot#readme"
+}

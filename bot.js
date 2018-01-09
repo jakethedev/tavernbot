@@ -30,7 +30,7 @@ client.on('message', msg => {
     //Remove botkey and break it up into clean not-mixed-cased parts.
     let parts = msg.content.trim().toLowerCase().substring(1).split(/\s+/)
     let cmd = parts[0]
-    let input = parts[1] ? parts.slice(1).join(' ') : null //Some cmds have no input, this lets us use if(input)
+    let input = parts[1] ? parts.slice(1).join(' ') : '' //Some cmds have no input, this lets us use if(input)
     //From here, we check each lib until we find a match for execution, or we let the user know it's a no-go
     if ( cmd in tavernlib ) {
       console.log( 'Found '+cmd+' in tavernlib, running with input='+input+' for requestor='+msg.author.username )
@@ -45,5 +45,4 @@ client.on('message', msg => {
 });
 
 // Turning the key and revving the bot engine
-console.log();
 client.login(token);

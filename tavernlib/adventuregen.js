@@ -89,12 +89,13 @@ const validSettings = {
 
 // Default to high fantasy hooks, and prefix-search validSettings for the right generator.
 // So the user doesn't have to type '!cmd highfantasy' every time, just '!cmd hi'
-exports.rpghook = function(setting = 'highfantasy'){
+exports.hook = function(setting = ''){
+  setting = ( setting ? setting.toLowerCase() : 'highfantasy' )
   const validSettingNames = Object.keys(validSettings);
-  let firstMatch = validSettingNames.filter((name) => name.startsWith(setting))[0]
+  let firstMatch = validSettingNames.filter((name) => name === setting || name.startsWith(setting) )[0]
   if (!firstMatch || !validSettings[firstMatch]){
     return "Sorry, I only have ideas for these settings: " + Object.keys(validSettings).join(", ") +
       ". Protip: you can prefix search - 'hig' will return 'highfantasy' hooks!" ;
   }
-  return validSettings[firstMatch](); //Fingers crossed
+  return validSettings[firstMatch]();
 }

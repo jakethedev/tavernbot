@@ -10,7 +10,10 @@ exports.coin = function(){
 }
 
 // The crazy custom roll parser.
-exports.roll = function(rollInput) {
+exports.roll = function(rollInput = '') {
+  //Have a default
+  if (!rollInput) return "a d20 skitters across the table, you rolled a " + exports.d(20)
+
   let response = '\n';
   for ( rollSegment of rollInput.split(',') ) {
     //Smash response together with each result

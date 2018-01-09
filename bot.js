@@ -20,9 +20,6 @@ client.on('ready', () => {
 
 // Command central
 client.on('message', msg => {
-  // This is a test msg, leave commented out for bot usages
-  // msg = { "content": "!hook low", "author": { 'username': "TEST INPUT" }, "reply": console.log, "channel": { "name": "golemworks" } };
-
   // Let's hook it up for a default channel and DMs
   if ( msg.channel.name == defaultChannel || msg.channel.recipient ){
     //Make sure we care, and that we're not making ourselves care
@@ -33,13 +30,13 @@ client.on('message', msg => {
     let input = parts[1] ? parts.slice(1).join(' ') : '' //Some cmds have no input, this lets us use if(input)
     //From here, we check each lib until we find a match for execution, or we let the user know it's a no-go
     if ( cmd in tavernlib ) {
-      console.log( 'Found '+cmd+' in tavernlib, running with input='+input+' for requestor='+msg.author.username )
+      console.log( 'Running tavernlib.'+cmd+' with input='+input+' for '+msg.author.username )
       msg.reply( tavernlib[cmd]( input ) )
     } else if ( cmd in discordlib ) {
-      console.log( 'Found '+cmd+' in tavernlib, running with input='+input+' for requestor='+msg.author.username )
+      console.log( 'Running discordlib.'+cmd+' with input='+input+' for '+msg.author.username )
       msg.reply( discordlib[cmd]( input, msg, client ) )
     } else {
-      msg.reply("I'm sorry Dave, I'm afraid I can't do that")
+      msg.reply("I'm sorry "+msg.author.username+", I'm afraid I can't do that")
     }
   }
 });

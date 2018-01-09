@@ -4,7 +4,7 @@
   "description": "A D&D bot for discord, written in Node. This bot supports common tabletop RPG functionality and more",
   "main": "bot.js",
   "scripts": {
-    "bot": "node bot.js",
+    "bot": "nodemon bot.js",
     "test": "node test.js",
     "serve": "echo Not supported, implement an api first and we'll talk",
     "build": "echo Placeholder text for smushing libs into an rpgapp.js for web page usage"
@@ -36,6 +36,7 @@
     "discord.js": "^11.2.1",
     "libsodium-wrappers": "^0.7.3",
     "node-opus": "^0.2.7",
+    "nodemon": "^1.14.9",
     "uws": "^9.14.0"
   },
   "engines": {

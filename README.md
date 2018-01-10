@@ -1,6 +1,7 @@
-# DungeonBot
+# DungeonBot - [Ideas and Suggestions Welcome!](https://github.com/JakeRunsDnD/dungeonbot/issues)
+### (Soon to be renamed... Tavernbot? RPGBot? TBD)
 
-A generator bot for Game Masters of D&D. Initially, this will just be a
+This is a generator bot for Game Masters of D&D. Initially, this will just be a
 Discord bot, but it will soon break apart into multiple modules - notably,
 the tavernlib directory will live as its own project on NPM as a catchall
 multi-use RPG lib, with multiple build commands for use as a bot or as

@@ -11,6 +11,22 @@ But the general idea is that is would be hella dope to have a really good D&D bo
 
 I think so. So here's my shot at it.
 
+Note to Self: Figure out what's up with these. Contact ThreeToes and see
+if they'd consider updating their npm package name
+
+https://github.com/ThreeToes/dice-lib
+https://github.com/mrprim/random-rpg-stuff
+https://github.com/guumaster/rpgen
+https://github.com/hogart/rpg-tools
+https://github.com/ara-ta3/node-quest
+https://github.com/photonstorm/phaser
+https://www.npmjs.com/package/dungeonworld-data
+https://www.npmjs.com/package/rpg-names
+https://www.npmjs.com/package/rpgparser
+https://www.npmjs.com/package/fabrico
+https://www.npmjs.com/package/the-npm-rpg
+https://www.npmjs.com/package/rpg-helper
+
 ## Todo List in JakeShorthand(TM)
 
 Key: - todo, > in progress, X done, ? maybe
@@ -60,4 +76,53 @@ Major Tasks
     - set up a bond table to roll on
 ```
 
+Additional Notes:Discord Bot Thoughts and Ideas
+------------------------------
+Throttle max rolls to 100. If more, mutiply to match and throw another 100 on it.
+Cap dice types at 5 instances of 'd'? "Error: Too complex"?
+I want to roll this '1d20 + 5, 2d6 + 2d8 + 3'
+
+LOOK UP https://discord.js.org/#/docs/main/stable/topics/voice
+
+Good Practices
+- package.json for sanity
+- Build out functionality as an npm project?
+
+Funnel Character generator
+- PHB spread w/stat priority per class
+- 4d6k3
+- Colville method
+- 6 + 2d6
+
+Keep last 128 macros?
+Find a good base of Character Sheet JSON
+
+Might be good to steal from https://github.com/opendnd
+Great dice roller: https://github.com/NickMele/node-dice
+Other sources:
+  https://github.com/jhamlet/dice-js
+  https://github.com/thebinarypenguin/droll
+
+Code from Slack-dnd that might help parser:
+if(parsed.pathname === '/roll'){
+  var diceData = parsed.query.text.split('d');
+  var echoChannel = parsed.query.channel_id;
+  var numDice = parseInt(diceData[0] || 1, 10);
+  var diceType = parseInt(diceData[1], 10);
+  var results = [];
+  var roll = 0;
+
+  console.log('request', req.url);
+
+  if(!isNaN(numDice) && !isNaN(diceType)){
+    console.log('valid request, rolling dice');
+    numDice = numDice > 10 ? 10 : numDice;
+    diceType = diceType > 20 ? 20 : diceType;
+    for(var i = 0; i < numDice; i++){
+      roll = rollDie(diceType);
+      results.push(roll);
+    }
+  }
+  etc;
+}
 

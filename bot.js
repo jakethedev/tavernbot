@@ -11,7 +11,7 @@ client.on("error", (e) => console.error(e))
 
 // Startup callback
 client.on('ready', () => {
-  console.log(`Rolling initiative as ${client.user.tag}!`)
+  console.log(`I'm rolling initiative as ${client.user.tag}!`)
   client.user.setPresence({
     "status": "online",
     "game": { "name" : gameStatus }

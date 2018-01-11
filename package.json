@@ -6,7 +6,6 @@
   "scripts": {
     "bot": "nodemon bot.js",
     "test": "node test.js",
-    "serve": "echo Not supported, implement an api first and we'll talk",
     "build": "echo Placeholder text for smushing libs into an rpgapp.js for web page usage"
   },
   "repository": {

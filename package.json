@@ -1,7 +1,7 @@
 {
   "name": "tavernbot",
   "version": "0.1.0",
-  "description": "A D&D bot for discord, written in Node. This bot supports common tabletop RPG functionality and more",
+  "description": "A D&D bot for discord, written in Node. This bot supports common tabletop RPG functionality, common Discord operations, and more",
   "main": "bot.js",
   "scripts": {
     "bot": "nodemon bot.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jakerunsdnd/dungeonbot"
+    "url": "https://github.com/jakerunsdnd/tavernbot"
   },
   "keywords": [
     "tabletop",
@@ -28,9 +28,9 @@
   "author": "JakeRunsDnD",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jakerunsdnd/dungeonbot/issues"
+    "url": "https://github.com/jakerunsdnd/tavernbot/issues"
   },
-  "homepage": "https://github.com/jakerunsdnd/dungeonbot#readme",
+  "homepage": "https://github.com/jakerunsdnd/tavernbot#readme",
   "dependencies": {
     "discord.js": "^11.2.1",
     "libsodium-wrappers": "^0.7.3",

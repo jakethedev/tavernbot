@@ -1,5 +1,5 @@
 {
-  "name": "dungeonbot",
+  "name": "tavernbot",
   "version": "0.1.0",
   "description": "A D&D bot for discord, written in Node. This bot supports common tabletop RPG functionality and more",
   "main": "bot.js",

@@ -1,7 +1,7 @@
 {
   "name": "tavernbot",
   "version": "0.1.0",
-  "description": "A D&D bot for discord, written in Node. This bot supports common tabletop RPG functionality, common Discord operations, and more",
+  "description": "A Dungeons and Dragons GM bot for discord, written in Node. This bot supports common tabletop RPG functionality, common Discord operations, and more",
   "main": "bot.js",
   "scripts": {
     "bot": "nodemon bot.js",
@@ -15,7 +15,6 @@
   "keywords": [
     "tabletop",
     "dnd",
-    "d&d",
     "rpg",
     "dice",
     "roller",

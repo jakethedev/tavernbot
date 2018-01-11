@@ -1,5 +1,4 @@
-# DungeonBot - [Ideas and Suggestions Welcome!](https://github.com/JakeRunsDnD/dungeonbot/issues)
-### (Soon to be renamed... Tavernbot? RPGBot? TBD)
+# TavernBot - [Ideas and Suggestions Welcome!](https://github.com/JakeRunsDnD/tavernbot/issues)
 
 This is a generator bot for Game Masters of D&D. Initially, this will just be a
 Discord bot, but it will soon break apart into multiple modules - notably,

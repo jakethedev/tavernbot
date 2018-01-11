@@ -11,6 +11,9 @@ But the general idea is that is would be hella dope to have a really good D&D bo
 
 I think so. So here's my shot at it.
 
+For dungeon world content:
+https://www.npmjs.com/package/dungeonworld-data
+
 Note to Self: Figure out what's up with these. Contact ThreeToes and see
 if they'd consider updating their npm package name
 

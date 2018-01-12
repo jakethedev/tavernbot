@@ -32,6 +32,7 @@
   "homepage": "https://github.com/jakerunsdnd/tavernbot#readme",
   "dependencies": {
     "discord.js": "^11.2.1",
+    "dungeonary": "latest",
     "libsodium-wrappers": "^0.7.3",
     "node-opus": "^0.2.7",
     "nodemon": "^1.14.9",

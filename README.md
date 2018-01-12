@@ -1,5 +1,4 @@
 # TavernBot - The Ultimate RPG Discord Bot for D&D, Pathfinder, and beyond!
----
 ### [Ideas and Suggestions Welcome!](https://github.com/JakeRunsDnD/tavernbot/issues)
 
 The idea: Wouldn't it be hella dope to have a really good D&D bot for discord? I think so. And this is the start of that solution.

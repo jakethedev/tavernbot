@@ -1,5 +1,5 @@
 # Dungeonary - The Ultimate Gamemaster and D&D Utility Lib
-###Ideas or suggestions? [Drop an issue on Github](https://github.com/JakeRunsDnD/tavernbot/issues) and I'll do my best to add it!
+### Ideas or suggestions? [Drop an issue on Github](https://github.com/JakeRunsDnD/tavernbot/issues) and I'll do my best to add it!
 
 It's like a library but magic!
 

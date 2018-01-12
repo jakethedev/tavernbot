@@ -1,6 +1,6 @@
 {
   "name": "dungeonary",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "D&D and tabletop RPG library for rolling dice, generating adventures, making characters, searching 5e and PF SRD for monsters and spells, and anything else that might come in handy",
   "main": "index.js",
   "scripts": {

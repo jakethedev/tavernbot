@@ -6,7 +6,7 @@ exports.d = function(sides, min = 1) {
 
 //For those tricky decisions
 exports.coin = function(){
-  return (exports.d(2) == 1 ? "heads" : "tails");
+  return 'the botcoin landed on ' + ( exports.d(2) == 1 ? 'heads' : 'tails' );
 }
 
 // The crazy custom roll parser.

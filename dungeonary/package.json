@@ -1,6 +1,6 @@
 {
-  "name": "tavernlib",
-  "version": "0.1.0",
+  "name": "dungeonary",
+  "version": "0.1.1",
   "description": "D&D and tabletop RPG library for rolling dice, generating adventures, making characters, searching 5e and PF SRD for monsters and spells, and anything else that might come in handy",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JakeRunsDnD/dungeonbot.git"
+    "url": "git+https://github.com/JakeRunsDnD/tavernbot.git"
   },
   "keywords": [
     "D&D",
@@ -32,7 +32,7 @@
   "author": "@JakeRunsDnD",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JakeRunsDnD/dungeonbot/issues"
+    "url": "https://github.com/JakeRunsDnD/tavernbot/issues"
   },
-  "homepage": "https://github.com/JakeRunsDnD/dungeonbot#readme"
+  "homepage": "https://github.com/JakeRunsDnD/tavernbot#readme"
 }

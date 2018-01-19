@@ -29,15 +29,16 @@ for (msg of msgs){
     let parts = msg.content.trim().toLowerCase().substring(1).split(/\s+/)
     let cmd = parts[0]
     let input = parts[1] ? parts.slice(1).join(' ') : '' //Some cmds have no input, this lets us use if(input)
+    let execTime = new Date(Date.now()).toLocaleString() + ': ';
     //From here, we check each lib until we find a match for execution, or we let the user know it's a no-go
     if ( cmd in dungeonary ) {
-      console.log( 'Found '+cmd+' in dungeonary, running with input='+input+' for requestor='+msg.author.username )
+      console.log( execTime + 'running dungeonary.'+cmd+'('+input+') for '+msg.author.username )
       msg.reply( dungeonary[cmd]( input ) )
     } else if ( cmd in discordlib ) {
-      console.log( 'Found '+cmd+' in discordlib, running with input='+input+' for requestor='+msg.author.username )
+      console.log( execTime + 'running discordlib.'+cmd+'('+input+') for '+msg.author.username )
       msg.reply( discordlib[cmd]( input, msg, client ) )
     } else {
-      msg.reply("I'm sorry Dave, I'm afraid I can't do that")
+      msg.reply("I'm sorry "+msg.author.username+", I'm afraid I can't do that")
     }
   }
 }

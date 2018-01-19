@@ -1,23 +1,32 @@
-require('discord.js')
+// All commands should have the signature:
+//    f(input:String, message:discord.js#message, client:discord.js#client)
 
-exports.addRole = function(client, user, role){
+//Given a rolename as input, add it to the requestor if it doesn't result in new privileges
+exports.addrole = function(input, message, client){
   //TODO Ensure requestor is admin or the user, then add role to user
+  return 'a role has no name';
 }
 
-exports.listRoles = function(client, user, role){
+//List the requestor's roles
+exports.roles = function(input, message, client){
   //TODO Return a list, could be empty so return something pleasant
+  return 'your role is to butter toast';
 }
 
-exports.removeRole = function(client, user, role){
+//Self-remove a role
+exports.unrole = function(input, message, client){
   //TODO Ensure requestor is admin or the user. Then remove role if exists.
+  return 'by your decree, we have banished you from the cool kids club';
 }
 
-exports.listUsersInRole = function(client, role){
+//Number of people in a given role
+exports.population = function(input, message, client){
   //TODO Publicly visible, so anyone should be able to do this.
   //Get all with role
   // let roleID = "264410914592129025";
   // let membersWithRole = message.guild.roles.get(roleID).members;
   // console.log(`Got ${membersWithRole.size} members with that role.`);
+
 }
 
 samplecode = function(){

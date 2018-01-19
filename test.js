@@ -1,6 +1,6 @@
 //All the custom stuff, this might be one library eventually
 //All the custom stuff, separated by converns
-const tavernlib = require('./tavernlib')
+const dungeonary = require('./dungeonary')
 const discordlib = require('./discordlib')
 const { token, botkey, defaultChannel, gameStatus } = require("./config.json")
 
@@ -30,11 +30,11 @@ for (msg of msgs){
     let cmd = parts[0]
     let input = parts[1] ? parts.slice(1).join(' ') : '' //Some cmds have no input, this lets us use if(input)
     //From here, we check each lib until we find a match for execution, or we let the user know it's a no-go
-    if ( cmd in tavernlib ) {
-      console.log( 'Found '+cmd+' in tavernlib, running with input='+input+' for requestor='+msg.author.username )
-      msg.reply( tavernlib[cmd]( input ) )
+    if ( cmd in dungeonary ) {
+      console.log( 'Found '+cmd+' in dungeonary, running with input='+input+' for requestor='+msg.author.username )
+      msg.reply( dungeonary[cmd]( input ) )
     } else if ( cmd in discordlib ) {
-      console.log( 'Found '+cmd+' in tavernlib, running with input='+input+' for requestor='+msg.author.username )
+      console.log( 'Found '+cmd+' in discordlib, running with input='+input+' for requestor='+msg.author.username )
       msg.reply( discordlib[cmd]( input, msg, client ) )
     } else {
       msg.reply("I'm sorry Dave, I'm afraid I can't do that")

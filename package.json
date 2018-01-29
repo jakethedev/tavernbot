@@ -4,8 +4,8 @@
   "description": "A Dungeons and Dragons GM bot for discord, written in Node. This bot supports common tabletop RPG functionality, common Discord operations, and more",
   "main": "bot.js",
   "scripts": {
-    "bot": "node bot.js 2&> active.log",
-    "daemon": "nodemon bot.js 2&> daemon.log",
+    "bot": "node bot.js",
+    "daemon": "nodemon bot.js",
     "test": "node test.js",
     "build": "echo Placeholder text for smushing libs into an rpgapp.js for web page usage"
   },

@@ -10,7 +10,7 @@ exports.coin = function(){
 }
 
 // The crazy custom roll parser.
-exports.roll = function(rollInput = '') {
+exports.dice = function(rollInput = '') {
   //Have a default
   if (!rollInput) return "a d20 skitters across the table, you rolled a " + exports.d(20)
 

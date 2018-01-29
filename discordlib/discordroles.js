@@ -26,7 +26,7 @@ exports.population = function(input, message, client){
   // let roleID = "264410914592129025";
   // let membersWithRole = message.guild.roles.get(roleID).members;
   // console.log(`Got ${membersWithRole.size} members with that role.`);
-
+  return 'the population is busy on twitter, please try again later';
 }
 
 samplecode = function(){

@@ -37,10 +37,10 @@ client.on('message', msg => {
       console.log( execTime + 'running discordlib.'+cmd+'('+input+') for '+msg.author.username )
       msg.reply( discordlib[cmd]( input, msg, client ) )
     } else {
-      msg.reply("I'm sorry "+msg.author.username+", I'm afraid I can't do that")
+      console.log( execTime + ' WARN: failed to run '+cmd+'('+input+') for '+msg.author.username )
     }
   }
 });
 
 // Turning the key and revving the bot engine
-client.login(token);
+client.login(token)

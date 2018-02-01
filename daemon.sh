@@ -10,7 +10,7 @@ else
   pgrep node -a || absent=true
   if [[ $absent ]]; then
     echo "$(date): WARN No nodemon found, summoning..."
-    npm run daemon &
+    npm run daemon > pidaemon.log &
   else
     echo "$(date): OK Running as expected"
   fi

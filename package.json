@@ -1,6 +1,6 @@
 {
   "name": "tavernbot",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Dungeons and Dragons GM bot for discord, written in Node. This bot supports common tabletop RPG functionality, common Discord operations, and more",
   "main": "bot.js",
   "scripts": {

@@ -5,8 +5,8 @@ exports.d = function(sides, min = 1) {
 }
 
 //For those tricky decisions
-exports.coin = function(){
-  return 'the botcoin landed on ' + ( exports.d(2) == 1 ? 'heads' : 'tails' );
+exports.coin = function() {
+  return 'the botcoin landed on ' + (exports.d(2) == 1 ? 'heads' : 'tails');
 }
 
 // The crazy custom roll parser.
@@ -15,10 +15,10 @@ exports.dice = function(rollInput = '') {
   if (!rollInput) return "a d20 skitters across the table, you rolled a " + exports.d(20)
 
   let response = '\n';
-  for ( rollSegment of rollInput.split(',') ) {
+  for (rollSegment of rollInput.split(',')) {
     //Smash response together with each result
     let sum = 0
-    for ( rollComponent of rollSegment.split('+') ) {
+    for (rollComponent of rollSegment.split('+')) {
       // console.log(rollComponent);
     }
     response += `Results for ${rollInput}: ${sum}\n`

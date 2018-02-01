@@ -3,11 +3,10 @@ exports.sass = function(input){
 }
 
 exports.summon = function(input, message){
-  if (message.mentions && message.mentions.users.first){
-    let targetToSummon = message.mentions.users.first
+  if (message.mentions.users && message.mentions.users.size > 0){
+    let targetToSummon = message.mentions.users.first()
     let response = `Throwing a salt circle...
-
-  \`\`\`           %%%    %%%
+\`\`\`             %%%    %%%
         %%%              %%%
 
     %%%                      %%%

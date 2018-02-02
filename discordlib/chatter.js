@@ -3,10 +3,11 @@ exports.sass = function(input) {
 }
 
 exports.summon = function(input, message) {
+  //TODO Consider a ring of :fire: and actually tagging summoned user
   if (message.mentions.users && message.mentions.users.size > 0) {
     let targetToSummon = message.mentions.users.first()
-    let response = `Throwing a salt circle...
-\`\`\`             %%%    %%%
+    let response = `Throwing a salt circle... \`\`\`
+             %%%    %%%
         %%%              %%%
 
     %%%                      %%%
@@ -22,5 +23,5 @@ exports.summon = function(input, message) {
             %%%     %%%\`\`\``
     return response
   }
-  return 'you can\'t just summon nothing, that\'s not how this works!'
+  return "you can't just summon nothing, that's not how this works!"
 }

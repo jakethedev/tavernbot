@@ -37,3 +37,25 @@ exports.dice = function(rollInput = '') {
    */
   return 'This was a triumph'; // TODO: Parse input, roll dice, return reasonable output chunk
 }
+
+// Stat roller function. Uses an approved method and reports results cleanly
+// TODO This should go in a character gen lib eventually
+exports.rollstats = function(methodInput = '4d6k3') {
+  const validMethods = ['4d6k3', '2d6+6', 'colville']
+  const method = validMethods.includes(methodInput) ? methodInput.toLowerCase() : validMethods[0]
+  let stats = { 'STR': 0, 'DEX': 0, 'CON': 0, 'INT': 0, 'WIS': 0, 'CHA': 0 }
+  if (method == '4d6k3') {
+
+  } else if (method == '2d6+6') {
+
+  } else if (method == 'colville') {
+    // Roll 4d6k3 until two 15+ stats have been achieved. This happens in order
+  }
+  let [header, footer] = ['', '']
+  for (stat in stats) {
+    header += stat + ' '
+    footer += stats[stat] + ' '
+    while (footer.length < header.length) footer += ' '
+  }
+  return `the ${method} method has blessed you with: \n\`\`\`${header}\n${footer}\`\`\``
+}

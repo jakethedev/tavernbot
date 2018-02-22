@@ -11,7 +11,8 @@ exports.addrole = function(input, message, client) {
   return 'a role has no name'
 }
 
-//List the requestor's roles
+//List the requestor's roles.
+//TODO Use this, list a target's roles; let targetToSummon = message.mentions.users.first()
 exports.roles = function(input, message, client) {
   const userRolesRaw = message.member.roles
   let roleResults = []
@@ -27,7 +28,7 @@ exports.roles = function(input, message, client) {
 //Self-remove a role
 exports.unrole = function(input, message, client) {
   //TODO Ensure requestor is admin or the user. Then remove role if exists.
-  return 'by your decree, we have banished you from the cool kids club';
+  return 'by your decree, we have banished you from the cool kids club'
 }
 
 //Number of people in a given role

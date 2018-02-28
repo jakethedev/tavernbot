@@ -2,6 +2,9 @@
 const dungeonary = require('./dungeonary')
 const discordlib = require('./discordlib')
 
+//TODO: Map this all at boot, so there isn't a loop to find each op. Way better.
+//var knownOps = []; for ( func in lib ){ knownOps[func] = lib[func] }
+
 const Discord = require("discord.js")
 const client = new Discord.Client()
 const { token, botkey, defaultChannel, gameStatus } = require("./config.json")

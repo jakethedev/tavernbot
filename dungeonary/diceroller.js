@@ -45,7 +45,15 @@ exports.rollstats = function(methodInput = '4d6k3') {
   const method = validMethods.includes(methodInput) ? methodInput.toLowerCase() : validMethods[0]
   let stats = { 'STR': 0, 'DEX': 0, 'CON': 0, 'INT': 0, 'WIS': 0, 'CHA': 0 }
   if (method == '4d6k3') {
-
+    for (const statName of Object.keys(stats)) {
+      var lowest = 6
+      for (var i = 0; i < 4; i++) {
+        singleRoll = exports.d(6)
+        lowest = singleRoll < lowest ? singleRoll : lowest
+        stats[statName] += singleRoll
+      }
+      stats[statName] -= lowest
+    }
   } else if (method == '2d6+6') {
 
   } else if (method == 'colville') {

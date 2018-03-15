@@ -1,0 +1,14 @@
+[Unit]
+Description=Tavernbot: The best RPG bot for Discord
+Documentation=https://github.com/jakerunsdnd/tavernbot
+After=network.target
+
+[Service]
+Environment=NODE_ENV=production
+Type=simple
+User=pi
+ExecStart=/usr/bin/node /opt/tavernbot/bot.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

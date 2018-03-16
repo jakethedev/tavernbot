@@ -4,11 +4,15 @@ Documentation=https://github.com/jakerunsdnd/tavernbot
 After=network.target
 
 [Service]
-Environment=NODE_ENV=production
 Type=simple
 User=pi
+Environment=NODE_ENV=production
 ExecStart=/usr/bin/node /opt/tavernbot/bot.js
 Restart=on-failure
+RestartSec=60s
+#Only available in systemd 236+
+#StandardOutput=file:/var/log/bot.log
+#StandardError=file:/var/log/bot.err
 
 [Install]
 WantedBy=multi-user.target

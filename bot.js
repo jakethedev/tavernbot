@@ -14,6 +14,7 @@ client.on("error", (e) => console.error(e))
 
 // Startup callback
 client.on('ready', () => {
+  if (process.env.NODE_ENV) console.log(`${process.env.NODE_ENV} mode activated!`)
   console.log(`I'm rolling initiative as ${client.user.tag}!`)
   client.user.setPresence({
     "status": "online",

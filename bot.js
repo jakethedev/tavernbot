@@ -1,20 +1,27 @@
 //All the custom stuff, separated by converns
 const dungeonary = require('./dungeonary')
 const discordlib = require('./discordlib')
-
-//TODO: Map this all at boot, so there isn't a loop to find each op. Way better.
-//var knownOps = []; for ( func in lib ){ knownOps[func] = lib[func] }
+//TODO: Map all the libs at boot, so there isn't a loop to find each op. Way better.
+//var knownOps = []; for ( func in req('./lib') ){ knownOps[func] = lib[func] }
 
 const Discord = require("discord.js")
 const client = new Discord.Client()
-const { token, botkey, defaultChannel, gameStatus } = require("./config.json")
+const {
+  token,
+  botkey,
+  botRole,
+  activeChannels,
+  gameStatus
+} = require("./config.json")
 
 // In case something happens, we'll want to see logs
 client.on("error", (e) => console.error(e))
 
 // Startup callback
 client.on('ready', () => {
-  if (process.env.NODE_ENV) console.log(`${process.env.NODE_ENV} mode activated!`)
+  if (process.env.NODE_ENV) {
+    console.log(`${process.env.NODE_ENV} mode activated!`)
+  }
   console.log(`I'm rolling initiative as ${client.user.tag}!`)
   client.user.setPresence({
     "status": "online",
@@ -24,8 +31,8 @@ client.on('ready', () => {
 
 // Command central
 client.on('message', msg => {
-  // Let's hook it up for a default channel and DMs
-  if (msg.channel.name == defaultChannel || msg.channel.recipient) {
+  // Let's hook it up for a default set of channels and DMs
+  if (activeChannels.includes(msg.channel.name.toLowerCase()) || msg.channel.recipient) {
     //Make sure we care, and that we're not making ourselves care
     if (!msg.content.trim().startsWith(botkey) || msg.author.bot) return
     //Remove botkey and break it up into clean not-mixed-cased parts.

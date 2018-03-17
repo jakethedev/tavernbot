@@ -2,7 +2,13 @@
 //All the custom stuff, separated by converns
 const dungeonary = require('./dungeonary')
 const discordlib = require('./discordlib')
-const { token, botkey, defaultChannel, gameStatus } = require("./config.json")
+const {
+  token,
+  botkey,
+  botRole,
+  activeChannels,
+  gameStatus
+} = require("./config.json")
 
 let msgs = [
   { "content": "!coin", "author": { 'username': "TEST INPUT" }, "reply": console.log, "channel": { "name": "golemworks" } },
@@ -22,7 +28,7 @@ let msgs = [
 
 for (msg of msgs) {
   // Let's hook it up for a default channel and DMs
-  if (msg.channel.name == defaultChannel || msg.channel.recipient) {
+  if (activeChannels.includes(msg.channel.name.toLowerCase()) || msg.channel.recipient) {
     //Make sure we care, and that we're not making ourselves care
     if (!msg.content.trim().startsWith(botkey) || msg.author.bot) return
     //Remove botkey and break it up into clean not-mixed-cased parts.

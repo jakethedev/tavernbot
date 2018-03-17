@@ -1,14 +1,19 @@
-// All commands should have the signature:
+// TO PROGRAMMERS: commands should have the signature:
 //    f(input:String, message:discord.js#message, client:discord.js#client)
+
+getManagedRoles = function(client) {
+
+}
 
 //Given a rolename as input, add it to the requestor if it doesn't result in new privileges
 exports.addrole = function(input, message, client) {
-  //TODO Ensure requestor is admin or the user, then add role to user
-
+  //TODO Ensure requestor is admin or the user, then if the role is a managed role, add role to user
+  // let validRoles = message.guild.roles.filter((role) => role.id < )
   // if (role.position < bot.role.position) {
+  //   member.addRole().catch(console.error)
   //   console.log('Requesting ' + role + ' and it\'s lower ranked than the bot role, so we good')
   // }
-  return 'a role has no name'
+  return `a role has no name`
 }
 
 //List the requestor's roles.
@@ -19,21 +24,21 @@ exports.roles = function(input, message, client) {
   // Stash the results, strip any @ symbols to avoid pinging @everyone every single time
   userRolesRaw.forEach(role => roleResults.push(role.name.replace('@', '')))
   if (roleResults[0]) {
-    return 'here are your roles: [' + roleResults.join(', ') + ']'
+    return `here are your roles: [${roleResults.join(', ')}]`
   } else {
-    return 'your purpose is to butter toast. (no roles found)'
+    return `your purpose is to butter toast. (no roles found)`
   }
 }
 
 //Self-remove a role
 exports.unrole = function(input, message, client) {
   //TODO Ensure requestor is admin or the user. Then remove role if exists.
-  return 'by your decree, we have banished you from the cool kids club'
+  return `by your decree, we have banished you from the cool kids club`
 }
 
 //Number of people in a given role
 exports.rolesize = function(input = '', message, client) {
-  if (!input) return 'there are many members with many roles, give me a role and I\'ll give you an answer'
+  if (!input) return `give me a role and I'll give you an answer`
   if (message.guild.available) { //Docs recommend this check
 
     //Make input easier to search with, comb the roles, and return the size of the role if it's found
@@ -43,16 +48,16 @@ exports.rolesize = function(input = '', message, client) {
       let roleCount = roleResult.members.size
       return `there are ${roleCount} members in ${roleResult.name}`
     } else {
-      return 'role not found - enter the role\'s full name to get you a member count'
+      return `role not found - gimme the role's full name, and I'll get you a member count`
     }
   } else {
-    return 'there was a temporal anomaly, I believe I need my oil changed'
+    return `there was a temporal anomaly, I believe I need my oil changed`
   }
 }
 
 //List people in a given role
 exports.rolemembers = function(input = '', message, client) {
-  if (!input) return 'there are many members with many roles, give me a role and I\'ll give you an answer'
+  if (!input) return `give me a role and I'll give you an answer`
   if (message.guild.available) { //Docs recommend this check
     //TODO Copy rolesize function but list names
     return 'blame jake for this message'
@@ -83,6 +88,7 @@ samplecode = function() {
   // Add the role!
   member.addRole(role).catch(console.error)
 
+  message.guild.roles.find("name", "Moderators")
   // Remove a role!
   member.removeRole(role).catch(console.error)
 

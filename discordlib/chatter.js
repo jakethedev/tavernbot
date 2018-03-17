@@ -6,14 +6,15 @@ exports.summon = function(input, message) {
   //TODO Consider a ring of :fire: and actually tagging summoned user
   if (message.mentions.users && message.mentions.users.size > 0) {
     let targetToSummon = message.mentions.users.first()
-    let response = `Throwing a salt circle... \`\`\`
+    let response = `your wish is my command.
+    COME FORTH ${targetToSummon}! \`\`\`
              %%%    %%%
         %%%              %%%
 
     %%%                      %%%
 
    %%%                         %%%
-          ${targetToSummon}
+          ${targetToSummon.nickname}
    %%%                         %%%
 
    %%%                        %%%

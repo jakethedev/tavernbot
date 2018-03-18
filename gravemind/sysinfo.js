@@ -13,3 +13,7 @@ exports.bug = function() {
 exports.feedback = exports.request = exports.feature = function() {
   return `got a feature idea or some feedback? Awesome! Let me know here: ${process.env.npm_package_bugs_url}`
 }
+
+exports.memory = function() {
+  return "I have no memory of this place"
+}

@@ -1,6 +1,7 @@
 //All the custom stuff, separated by converns
 const dungeonary = require('./dungeonary')
 const discordlib = require('./discordlib')
+const gravemind = require('./gravemind')
 //TODO: Map all the libs at boot, so there isn't a loop to find each op. Way better.
 //var knownOps = []; for ( func in req('./lib') ){ knownOps[func] = lib[func] }
 
@@ -22,7 +23,7 @@ client.on('ready', () => {
   if (process.env.NODE_ENV) {
     console.log(`${process.env.NODE_ENV} mode activated!`)
   }
-  console.log(`I'm rolling initiative as ${client.user.tag}!`)
+  console.log(`Tavernbot v${process.env.npm_package_version} has logged in as ${client.user.tag}!`)
   client.user.setPresence({
     "status": "online",
     "game": { "name": gameStatus }
@@ -47,6 +48,9 @@ client.on('message', msg => {
     } else if (cmd in discordlib) {
       console.log(execTime + 'running discordlib.' + cmd + '(' + input + ') for ' + msg.author.username)
       msg.reply(discordlib[cmd](input, msg, client))
+    } else if (cmd in gravemind) {
+      console.log(execTime + 'running gravemind.' + cmd + '(' + input + ') for ' + msg.author.username)
+      msg.reply(gravemind[cmd](input, msg, client))
     } else {
       console.log(execTime + ' WARN: failed to run ' + cmd + '(' + input + ') for ' + msg.author.username)
     }

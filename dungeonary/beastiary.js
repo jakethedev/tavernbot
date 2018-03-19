@@ -5,8 +5,8 @@ validGames = {
 }
 
 // Search function for available monsters per system.
-exports.monster = function(monsterName, gameSystem = '5e'){
-  if (! gameSystem in validGames ) {
+exports.monster = function(monsterName, gameSystem = '5e') {
+  if (!gameSystem in validGames) {
     return "Sorry, I currently only have SRD beastiaries for: " + validGames.join(", ");
   }
   //TODO Search and return

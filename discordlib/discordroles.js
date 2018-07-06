@@ -8,10 +8,10 @@ getManagedRoles = function(client) {
 exports.newrole = function(input, message, client) {
   if (input.toLowerCase() == 'help') return `help for newrole`
   if (!message.member) return `you don't even live here, stop messing with things (err: not a server member)`
-  if (message.member.permissions.includes 'fuck with shit'){
-    discord.addNewRole(name: input)
-    return `mission accomplished - your role called "${input}" is ready to rock`
-  }
+  // if (message.member.permissions.includes 'icandothings'){
+  //   discord.addNewRole(name: input)
+  //   return `mission accomplished - your role called "${input}" is ready to rock`
+  // }
   return `put that back, you're not allowed to touch it. (err: ain't got permission pal)`
 }
 

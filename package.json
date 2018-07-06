@@ -1,13 +1,14 @@
 {
   "name": "tavernbot",
-  "version": "0.1.7",
-  "releasenotes": "Recently updated: !dice parses dice commands now! Try it with '!dice 1d20 + 5, 3d6 + 5' or something. Also, !stats lets you choose how it works: does 4d6k3 by default, and allows 3d6, funnel (which is 3d6), and 2d6+6 as input",
+  "version": "0.2.0",
+  "releasenotes": "Recently updated: new origin of code at github/jakethedev - and I committed a git travesty, so idk what other changes are here",
   "description": "A Dungeons and Dragons GM bot for discord, written in Node. This bot supports common tabletop RPG functionality, common Discord operations, and more",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
     "devbot": "nodemon bot.js",
-    "test": "node test.js",
+    "test": "node test.js > /dev/null",
+    "verbosetest": "node test.js",
     "build": "echo Placeholder text for smushing libs into an rpgapp.js for web page usage"
   },
   "repository": {

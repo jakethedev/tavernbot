@@ -1,7 +1,7 @@
 {
-  "token": "keep it secret, keep it safe",
+  "token": "NDA3MzYxOTcxOTE5NTE5NzQ2.DVBPog.jlxEr9Eb63n8oKrSxoWmP_EufUo",
   "botkey": "!",
-  "defaultChannel": "golemworks",
-  "activeChannels": ["golemworks", "bot", "todo implement this"],
-  "gameStatus": "several RPGs at once"
+  "botRole": "Warforged",
+  "activeChannels": ["golemworks", "bot"],
+  "gameStatus": "tavernbot | !help for info"
 }

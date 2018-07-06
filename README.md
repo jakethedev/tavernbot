@@ -17,9 +17,10 @@ Below is a sort of notepad, and generally contains nothing useful. If you have i
 
 ---
 
+Autoreload complete! Putting this here to commit the fix :)
+
 Source for dungeon world content: https://www.npmjs.com/package/dungeonworld-data
 
-#### Additional Notes:Discord Bot Thoughts and Ideas
 Throttle max rolls to 100. If more, mutiply to match and throw another 100 on it.
 Cap dice types at 5 instances of 'd'? "Error: Too complex"?
 I want to roll this '1d20 + 5, 2d6 + 2d8 + 3'
@@ -37,7 +38,6 @@ Keep last 128 macros? 256?
 Find a good base of Character Sheet JSON
 
 Possibly useful for inspiration https://github.com/opendnd
-
 
 
 

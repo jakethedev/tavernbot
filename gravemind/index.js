@@ -1,9 +1,6 @@
 // List all local components here
 const components = [
-  './adventuregen',
-  './beastiary',
-  './diceroller',
-  './spellbook'
+  './sysinfo'
 ]
 
 // Go through each chunk of the library and set each exported

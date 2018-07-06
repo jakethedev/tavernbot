@@ -4,11 +4,12 @@
   "description": "D&D and tabletop RPG library for rolling dice, generating adventures, making characters, searching 5e and PF SRD for monsters and spells, and anything else that might come in handy",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "echo 'This is a placeholder until I actually write in webpack' && exit 1",
+    "test": "echo 'Error: no test specified' && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JakeRunsDnD/tavernbot.git"
+    "url": "git+https://github.com/jakethedev/tavernbot.git"
   },
   "keywords": [
     "D&D",
@@ -29,10 +30,10 @@
     "RPG",
     "utility"
   ],
-  "author": "@JakeRunsDnD",
+  "author": "jakethedev",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JakeRunsDnD/tavernbot/issues"
+    "url": "https://github.com/jakethedev/tavernbot/issues"
   },
-  "homepage": "https://github.com/JakeRunsDnD/tavernbot#readme"
+  "homepage": "https://github.com/jakethedev/tavernbot#readme"
 }

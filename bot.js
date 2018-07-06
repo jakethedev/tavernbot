@@ -1,47 +1,65 @@
-//All the custom stuff, separated by converns
+//All the custom stuff, separated by concerns
 const dungeonary = require('./dungeonary')
 const discordlib = require('./discordlib')
+const gravemind = require('./gravemind')
+//lolrandom
+require('./randomUtil')
+//TODO: Map all the libs at boot, so there isn't a loop to find each op. Way better.
+//var knownOps = []; for ( func in req('./lib') ){ knownOps[func] = lib[func] }
 
 const Discord = require("discord.js")
 const client = new Discord.Client()
-const { token, botkey, defaultChannel, gameStatus } = require("./config.json")
+const {
+  token,
+  botkey,
+  botRoleName,
+  activeChannels,
+  gameStatus
+} = require("./config.json")
 
 // In case something happens, we'll want to see logs
 client.on("error", (e) => console.error(e))
 
 // Startup callback
 client.on('ready', () => {
-  if (process.env.NODE_ENV) console.log(`${process.env.NODE_ENV} mode activated!`)
-  console.log(`I'm rolling initiative as ${client.user.tag}!`)
+  if (process.env.NODE_ENV) {
+    console.log(`${process.env.NODE_ENV} mode activated!`)
+  }
+  console.log(`Tavernbot v${process.env.npm_package_version} has logged in as ${client.user.tag}!`)
   client.user.setPresence({
     "status": "online",
-    "game": { "name" : gameStatus }
+    "game": { "name": gameStatus }
   })
+  //TODO Set a botRoleName value on lookup from the string in config
 })
 
 // Command central
 client.on('message', msg => {
-  // Let's hook it up for a default channel and DMs
-  if ( msg.channel.name == defaultChannel || msg.channel.recipient ){
+  // Let's hook it up for a default set of channels and DMs
+  if (activeChannels.includes(msg.channel.name.toLowerCase()) || msg.channel.recipient) {
     //Make sure we care, and that we're not making ourselves care
-    if ( !msg.content.trim().startsWith(botkey) || msg.author.bot) return
+    if (!msg.content.trim().startsWith(botkey) || msg.author.bot) return
     //Remove botkey and break it up into clean not-mixed-cased parts.
     let parts = msg.content.trim().toLowerCase().substring(1).split(/\s+/)
     let cmd = parts[0]
     let input = parts[1] ? parts.slice(1).join(' ') : '' //Some cmds have no input, this lets us use if(input)
-    let exectime = new Date(Date.now()).toLocaleString() + ': ';
+    let execTime = new Date(Date.now()).toLocaleString() + ': ';
+    //TODO: Genericise this. Load all libs into a single 'operations' object with a 'source' prop so we can stop this ifelse nonsense
     //From here, we check each lib until we find a match for execution, or we let the user know it's a no-go
-    if ( cmd in dungeonary ) {
-      console.log( execTime + 'running dungeonary.'+cmd+'('+input+') for '+msg.author.username )
-      msg.reply( dungeonary[cmd]( input ) )
-    } else if ( cmd in discordlib ) {
-      console.log( execTime + 'running discordlib.'+cmd+'('+input+') for '+msg.author.username )
-      msg.reply( discordlib[cmd]( input, msg, client ) )
+    if (cmd in dungeonary) {
+      console.log(execTime + 'running dungeonary.' + cmd + '(' + input + ') for ' + msg.author.username)
+      msg.reply(dungeonary[cmd](input))
+    } else if (cmd in discordlib) {
+      console.log(execTime + 'running discordlib.' + cmd + '(' + input + ') for ' + msg.author.username)
+      msg.reply(discordlib[cmd](input, msg, client)) //TODO Pass in botRoleReal?
+    } else if (cmd in gravemind) {
+      console.log(execTime + 'running gravemind.' + cmd + '(' + input + ') for ' + msg.author.username)
+      msg.reply(gravemind[cmd](input, msg, client))
     } else {
-      msg.reply("I'm sorry "+msg.author.username+", I'm afraid I can't do that")
+      console.log(execTime + ' WARN: failed to run ' + cmd + '(' + input + ') for ' + msg.author.username)
     }
   }
 });
 
 // Turning the key and revving the bot engine
-client.login(token);
+client.login(token)

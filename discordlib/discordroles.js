@@ -13,9 +13,9 @@ exports.newrole = function(input, message, client) {
 
 //Given a rolename as input, add it to the requestor if it doesn't result in new privileges
 exports.giverole = exports.addrole = function(input, message, client) {
-  if (input.toLowerCase() == 'help') return `run !putmein aRoleGoesHere to `
+  if (input.toLowerCase() == 'help') return `Usage: addrole/giverole 'the role name' will try to add the role to your user. Optionally, you can tag one person (after the role name) to attempt to give them the role`
   if (!input.trim()) return `you can't just add nothing as a role, that's not how any of this works!`
-  let expectedRoleName = input.split(' ')[0].toLowerCase() //One at a time, not gonna try supporting multiple with this
+  let expectedRoleName = input.split('<')[0].toLowerCase().trim() //Expecting only one role, before any mentions
   // Allows us to add a role to someone, pinging them required
   let requestorName = message.member.user.username
   let optionalMention = message.mentions.members.first()
@@ -25,7 +25,7 @@ exports.giverole = exports.addrole = function(input, message, client) {
   if (!roleToAdd){
     return `that role does not exist, checkest thy typing or speaketh with thy lord moderators`
   }
-  console.log(`Role ${roleToAdd.name} requested by ${requestorName} for ${targetName}...`)
+  console.log(`Role '${roleToAdd.name}' requested by ${requestorName} for ${targetName}...`)
   return targetMember.addRole(roleToAdd).then(result => {
     // S'gooood. This is idempotent, adding an existing role id a-ok
     return `${targetName} now has (or already had) the role ${roleToAdd.name}!`
@@ -38,7 +38,7 @@ exports.giverole = exports.addrole = function(input, message, client) {
 //List the requestor's roles.
 //TODO Use this, list a target's roles; let targetToSummon = message.mentions.users.first()
 exports.roles = function(input, message, client) {
-  if (input.toLowerCase() == 'help') return `help for roles`
+  if (input.toLowerCase() == 'help') return `roles will list the roles you have, if any`
   const userRolesRaw = message.member.roles
   let roleResults = []
   // Stash the results, strip any @ symbols to avoid pinging @everyone every single time

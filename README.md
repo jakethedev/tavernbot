@@ -7,37 +7,31 @@ TavernBot is a generator bot for Game Masters of D&D. This project is a Discord 
 
 This is currently an 0.x release - I will document features and such here as they're finished up and as we close in on 1.0, but for now, I'm pouring molten free time into this project to try and forge something awesome. Check the code for now if you want to know more.
 
-### Notable issues:
+## Development
+
+Fork this project, then follow these steps to get up and running! Make sure you have node 8+, with an appropriate npm, and a Discord bot token. Go to [this link](https://discordapp.com/developers/applications/me) to set up a bot account, add the token to config.json in the project root, then invite the bot to a server for testing. And don't forget npm install.
+
+'npm run devbot' will set you up with a hot-reloading bot instance, and 'npm test' should run quietly with no issues if everything's set up correctly. 'npm run verbosetest' will show you the npm test output, which should look like Discord-formatted responses.
+
+### Development triage:
 
 #### ImportError: no module compiler.ast:
 
 If you see the above issue during 'npm install', just run 'sudo apt install python-dev'. I'm as upset as you are that we need python for npm, but, c'est la vie.
 
-Below is a sort of notepad, and generally contains nothing useful. If you have ideas or features that you think this bot should support, [let me know on Github](https://github.com/jakethedev/tavernbot/issues) and we'll get it prioritized :D
-
 ---
 
-Autoreload complete! Putting this here to commit the fix :)
+Below is a sort of notepad, and generally contains nothing useful. If you have ideas or features that you think this bot should support, [let me know on Github](https://github.com/jakethedev/tavernbot/issues) and we'll get it prioritized :D
 
 Source for dungeon world content: https://www.npmjs.com/package/dungeonworld-data
 
-Throttle max rolls to 100. If more, mutiply to match and throw another 100 on it.
-Cap dice types at 5 instances of 'd'? "Error: Too complex"?
-I want to roll this '1d20 + 5, 2d6 + 2d8 + 3'
-
 Voice API https://discord.js.org/#/docs/main/stable/topics/voice
 
-Character stats implementations
-- PHB spread w/stat priority per class
-- 4d6k3
-- Colville method
-- 6 + 2d6
+Character stats implementation needs PHB spread w/stat priority per class
 
 Keep last 128 macros? 256?
 
 Find a good base of Character Sheet JSON
 
 Possibly useful for inspiration https://github.com/opendnd
-
-
 

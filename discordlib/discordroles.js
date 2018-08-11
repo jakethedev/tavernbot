@@ -1,10 +1,6 @@
 // TO PROGRAMMERS: commands should have the signature:
 //    f(input:String, message:discord.js#message, client:discord.js#client)
 
-getManagedRoles = function(client) {
-
-}
-
 exports.newrole = function(input, message, client) {
   if (input.toLowerCase() == 'help') return `help for newrole`
   if (!message.member) return `you don't even live here, stop messing with things (err: not a server member)`
@@ -12,19 +8,27 @@ exports.newrole = function(input, message, client) {
   //   discord.addNewRole(name: input)
   //   return `mission accomplished - your role called "${input}" is ready to rock`
   // }
-  return `put that back, you're not allowed to touch it. (err: ain't got permission pal)`
+  return `put that back, you're not allowed to touch it. (err: you don't have permission)`
 }
 
 //Given a rolename as input, add it to the requestor if it doesn't result in new privileges
-exports.addrole = function(input, message, client) {
-  if (input.toLowerCase() == 'help') return `help for addrole`
-  //TODO Ensure requestor is admin or the user, then if the role is a managed role, add role to user
-  // let validRoles = message.guild.roles.filter((role) => role.id < )
-  // if (role.position < bot.role.position) {
-  //   member.addRole().catch(console.error)
-  //   console.log('Requesting ' + role + ' and it\'s lower ranked than the bot role, so we good')
-  // }
-  return `a role has no name`
+exports.putmein = async function(input, message, client) {
+  if (input.toLowerCase() == 'help') return `help for putmein`
+  if (!input.trim()) return `you can't just add nothing as a role, that's not how any of this works!`
+  let expectedRoleName = input.toLowerCase() //Multiples caused me pain
+  let roleToAdd = message.guild.roles.find((role) => expectedRoleName == role.name.toLowerCase())
+  console.log('Attempting to add ' + roleToAdd.name + ' to author...')
+  //TODO LOOK AT THE PROMISE API WTF IS HAPPENENING
+  let response = ''
+  return message.member.addRole(roleToAdd).then(result => {
+    // got final result
+    return `you have been added to ${roleToAdd.name}!`
+  }).catch(err => {
+    // got error
+    return `things exploded and you have NOT been added to ${roleToAdd.name}!`
+  });
+    // .then(`you have been added to ${roleToAdd.name}!`)
+    // .catch(`things exploded and you have NOT been added to ${roleToAdd.name}!`)
 }
 
 //List the requestor's roles.

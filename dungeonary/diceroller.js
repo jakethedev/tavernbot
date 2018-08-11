@@ -18,33 +18,43 @@ exports.coin = function(input = 1) {
   }
 }
 
-// The crazy custom roll parser.
-exports.dice = exports.d = function(rollInput = '') {
-  //Nice defaults
+// The crazy custom roll parser. It's a good parser, and it deserves more composition, but mehhhh
+exports.dice = exports.d = exports.roll = function(rollInput = '') {
+  //Handy simple default
   if (!rollInput) return "a d20 skitters across the table, you rolled a " + randIntMinOne(20)
-  rollInput = rollInput.toLowerCase()
   if (rollInput == 'help') return `!dice XdY rolls a dY X times, you can sum varied dice, add constants, and comma separate rolls to have them all rolled at once!`
   if (rollInput.includes('-')) return `sorry, reverse math is not supported yet`
 
-  rollInput = rollInput.replace(/\s/g, '') //Cut space, much easier to parse
-  let response = 'the dice have fallen...\n';
+  let response = `here you go:\n`;
   for (rollSegment of rollInput.split(',')) {
-    //Smash response together with each result
-    let sum = 0
-    for (rollComponent of rollSegment.split('+')) {
-      if (rollComponent.split('d').length === 2) { //XdY or dY format
-        let [numRolls, diceSize] = rollComponent.split('d')
+    //Smash response together with each mathy result, ignore non numeric stuff entirely so people can label rolls
+    let sum = 0, parseSuccess = false
+    for (rollValue of rollSegment.trim().split(/[+\t ]+/g)) {
+      // TODO Use capture groups like a grownup
+      if (rollValue.match(/^\d*d\d+$/)) { //XdY or dY format
+        parseSuccess = true
+        let [numRolls, diceSize] = rollValue.split('d')
         numRolls = numRolls ? parseInt(numRolls) : 1
         diceSize = parseInt(diceSize)
-        while (numRolls-- > 0) // Subtraction after comparison, trick from C
+        while (numRolls-- > 0) // Subtraction happens after comparison
           sum += randIntMinOne(diceSize)
-      } else if (!isNaN(rollComponent)) { // X format, crude yet effective
-        sum += parseInt(rollComponent)
+      } else if (rollValue.match(/^\d+$/)) { // A constant num
+        parseSuccess = true
+        sum += parseInt(rollValue)
       } else {
-        return `there was a problem parsing '${rollComponent}', make sure that it's in XdY or X format`
+        // Assume we hit a comment or some other nonsense text
+        console.log(`Hit a weird spot. Old segment: ${rollSegment}`)
+        rollSegment = rollSegment.substring(0,rollSegment.indexOf(rollValue)).trim()
+        if(!rollSegment)
+          break
+        console.log(`New segment: '${rollSegment}'`)
+        // break
       }
     }
-    response += `${rollSegment}: **${sum}**\n`
+    if (parseSuccess) {
+      response += `${rollSegment}: **${sum}**\n`
+    }
+    parseSuccess = false
   }
   /**
    * Remaining potential here:
@@ -54,7 +64,7 @@ exports.dice = exports.d = function(rollInput = '') {
    *    roll(2d20, best)              Multiple take best
    *    roll(2d20, worst)             Multiple take worst
    */
-  return response; // TODO: Parse input, roll dice, return reasonable output chunk
+  return response
 }
 
 // Stat roller function. Uses an approved method and reports results cleanly

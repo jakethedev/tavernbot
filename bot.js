@@ -1,21 +1,28 @@
-//All the custom stuff, separated by concerns
-const dungeonary = require('./dungeonary')
-const discordlib = require('./discordlib')
-const gravemind = require('./gravemind')
-//lolrandom
+// For the occasional handy shortcut
 require('./randomUtil')
-//TODO: Map all the libs at boot, so there isn't a loop to find each op. Way better.
-//var knownOps = []; for ( func in req('./lib') ){ knownOps[func] = lib[func] }
 
-const Discord = require("discord.js")
-const client = new Discord.Client()
-const {
-  token,
-  botkey,
-  botRoleName,
-  activeChannels,
-  gameStatus
-} = require("./config.json")
+// Dynamically load all operations we care about into a single commander object
+loadAllOperations = function(libNames){
+  let allOps = {}, meta = {}
+  for (lib of libNames) {
+    meta[lib] = []
+    let libOps = require(lib);
+    for (op in libOps) {
+      allOps[op] = libOps[op]
+      meta[lib].push(op)
+    }
+
+  }
+  return [ allOps, meta ]
+}
+const [ commander, metadata ] = loadAllOperations(
+  [ './discordlib', './dungeonary', './gravemind' ]
+)
+
+// Core bot setup
+const { token, botkey, activeChannels, gameStatus } = require("./config.json")
+const discord = require("discord.js")
+const client = new discord.Client()
 
 // In case something happens, we'll want to see logs
 client.on("error", (e) => console.error(e))
@@ -24,39 +31,49 @@ client.on("error", (e) => console.error(e))
 client.on('ready', () => {
   if (process.env.NODE_ENV) {
     console.log(`${process.env.NODE_ENV} mode activated!`)
+  } else {
+    console.log(`NODE_ENV not set, running in dev mode`)
   }
   console.log(`Tavernbot v${process.env.npm_package_version} has logged in as ${client.user.tag}!`)
   client.user.setPresence({
     "status": "online",
     "game": { "name": gameStatus }
   })
-  //TODO Set a botRoleName value on lookup from the string in config
 })
 
 // Command central
 client.on('message', msg => {
-  // Let's hook it up for a default set of channels and DMs
-  if (activeChannels.includes(msg.channel.name.toLowerCase()) || msg.channel.recipient) {
-    //Make sure we care, and that we're not making ourselves care
+  // Contain the bot, and ensure we actually want to act on the command
+  let channelName = msg.channel.name ? msg.channel.name.toLowerCase() : "NOT_A_CHANNEL_NAME"
+  if (activeChannels.includes(channelName) || msg.channel.recipient) {
     if (!msg.content.trim().startsWith(botkey) || msg.author.bot) return
-    //Remove botkey and break it up into clean not-mixed-cased parts.
+    // Normalize input
     let parts = msg.content.trim().toLowerCase().substring(1).split(/\s+/)
     let cmd = parts[0]
     let input = parts[1] ? parts.slice(1).join(' ') : '' //Some cmds have no input, this lets us use if(input)
-    let execTime = new Date(Date.now()).toLocaleString() + ': ';
-    //TODO: Genericise this. Load all libs into a single 'operations' object with a 'source' prop so we can stop this ifelse nonsense
-    //From here, we check each lib until we find a match for execution, or we let the user know it's a no-go
-    if (cmd in dungeonary) {
-      console.log(execTime + 'running dungeonary.' + cmd + '(' + input + ') for ' + msg.author.username)
-      msg.reply(dungeonary[cmd](input))
-    } else if (cmd in discordlib) {
-      console.log(execTime + 'running discordlib.' + cmd + '(' + input + ') for ' + msg.author.username)
-      msg.reply(discordlib[cmd](input, msg, client)) //TODO Pass in botRoleReal?
-    } else if (cmd in gravemind) {
-      console.log(execTime + 'running gravemind.' + cmd + '(' + input + ') for ' + msg.author.username)
-      msg.reply(gravemind[cmd](input, msg, client))
+    let execTime = new Date(Date.now()).toLocaleString();
+    // If we have the requested op, send it - otherwise, log it quietly
+    if (cmd in commander) {
+      console.log(execTime + ': running ' + cmd + '(' + input + ') for ' + msg.author.username)
+      // Works for a string or a promise return. Sick. https://stackoverflow.com/a/27760489
+      Promise.resolve( commander[cmd](input, msg, client) )
+        .then(function(result) {
+          msg.reply(result)
+        })
+        .catch(function(err) {
+          console.log(`${execTime}: ERR: ${err}`)
+        })
+    } else if (cmd == 'help') {
+      let fullHelp = `\n**- Available Commands -**`
+      for (library in metadata){ // Already overloaded command, oops
+        fullHelp += `\n**${library} commands**: \n`
+        metadata[library].forEach((opName) => fullHelp += `${opName} `)
+      }
+      fullHelp += `\n\nFor any command, run '!command help' for detailed use info`
+      fullHelp += `\n\n*If you notice something weird or broken, let me know, run* !feedback *to learn how*`
+      msg.channel.send(fullHelp)
     } else {
-      console.log(execTime + ' WARN: failed to run ' + cmd + '(' + input + ') for ' + msg.author.username)
+      console.log(`${execTime}: NOTICE: can't find ${cmd}(${input}) for ${msg.author.username}`)
     }
   }
 });

@@ -1,7 +1,7 @@
 {
   "name": "tavernbot",
-  "version": "0.2.0",
-  "releasenotes": "Recently updated: new origin of code at github/jakethedev - and I committed a git travesty, so idk what other changes are here",
+  "version": "0.2.1",
+  "releasenotes": "!putmein - give yourself a new role, !help - I'LL SHOW YOU WHAT I GOT, !anycomand help - for detailed usage, !d/!dice - actually behaves when you put a message on the end",
   "description": "A Dungeons and Dragons GM bot for discord, written in Node. This bot supports common tabletop RPG functionality, common Discord operations, and more",
   "main": "bot.js",
   "scripts": {

@@ -1,5 +1,6 @@
 //Requires that randomUtil has loaded already.
 require('../randomUtil')
+const mathOps = "+-"
 
 //For those tricky decisions
 exports.coin = function(input = 1) {
@@ -18,49 +19,61 @@ exports.coin = function(input = 1) {
   }
 }
 
+function diceRegexMatcher(rollInput) {
+  // Turns '1d20+5+ 1d6 - 3d4 for fighting' into
+  //      ['1d20', '+', '5', '+', '1d6', '-', '3d4']
+  let diceRegex = /(\d*d?\d+)|[-\+]/g
+  let matches = []
+  while (match = diceRegex.exec(rollInput)) {
+    if (mathOps.includes(match[0])){
+      // + and - are external to capture groups but need to be matched for math stuff
+      matches.push(match[0])
+    } else {
+      matches.push(match[1])
+    }
+  }
+  return matches
+}
+
 // The crazy custom roll parser. It's a good parser, and it deserves more composition, but mehhhh
 exports.dice = exports.d = exports.roll = function(rollInput = '') {
   //Handy simple default
   if (!rollInput) return "a d20 skitters across the table, you rolled a " + randIntMinOne(20)
-  if (rollInput == 'help') return `!dice XdY rolls a dY X times, you can sum varied dice, add constants, and comma separate rolls to have them all rolled at once!`
-  if (rollInput.includes('-')) return `sorry, reverse math is not supported yet`
+  if (rollInput == 'help') return `!dice XdY rolls a dY X times, you can segmentTotal varied dice, add constants, and comma separate rolls to have them all rolled at once!`
 
-  let response = `here you go:\n`;
+  // Split up the input, regex-capture the right pieces, math them, and report the result
+  let response = `here you go:\n`
   for (rollSegment of rollInput.split(',')) {
-    //Smash response together with each mathy result, ignore non numeric stuff entirely so people can label rolls
-    let sum = 0, parseSuccess = false
-    for (rollValue of rollSegment.trim().split(/[+\t ]+/g)) {
-      // TODO Use capture groups like a grownup
-      if (rollValue.match(/^\d*d\d+$/)) { //XdY or dY format
-        parseSuccess = true
+    let diceMatches = diceRegexMatcher(rollSegment)
+    let segmentTotal = 0, subtractNextValue = false
+    for (rollValue of diceMatches) {
+      let tempSum = 0
+      // Can be one of '+', '-', 'XdY', or 'X'.
+      // If subtract, just note it for the next value.
+      if (rollValue == '-') {
+        subtractNextValue = true
+        continue
+      }
+      // The actual rolling of dice
+      if (rollValue.includes("d")) { //XdY or dY format
         let [numRolls, diceSize] = rollValue.split('d')
         numRolls = numRolls ? parseInt(numRolls) : 1
         diceSize = parseInt(diceSize)
         while (numRolls-- > 0) // Subtraction happens after comparison
-          sum += randIntMinOne(diceSize)
+          tempSum += randIntMinOne(diceSize)
       } else if (rollValue.match(/^\d+$/)) { // A constant num
-        parseSuccess = true
-        sum += parseInt(rollValue)
-      } else {
-        // Assume we hit a comment or some other nonsense text
-        console.log(`Hit a weird spot. Old segment: ${rollSegment}`)
-        rollSegment = rollSegment.substring(0,rollSegment.indexOf(rollValue)).trim()
-        if(!rollSegment)
-          break
-        console.log(`New segment: '${rollSegment}'`)
-        // break
+        tempSum += parseInt(rollValue)
       }
+      // Complete subtract contract
+      if (subtractNextValue){
+        tempSum *= -1
+        subtractNextValue = false
+      }
+      segmentTotal += tempSum
     }
-    if (parseSuccess) {
-      response += `${rollSegment}: **${sum}**\n`
-    }
-    parseSuccess = false
+    response += `${diceMatches.join(' ')}: **${segmentTotal}**\n`
   }
-  /**
-   * Remaining potential here:
-   *    roll(2d20 - 5)                Multiple sub const
-   *    roll(2d20 - d6)               Multiple sub dice
-   *    roll(2d20 + 1d12 + 1d6 + 7 - 1d4)   Long series
+  /* Remaining potential:
    *    roll(2d20, best)              Multiple take best
    *    roll(2d20, worst)             Multiple take worst
    */

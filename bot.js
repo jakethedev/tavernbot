@@ -11,7 +11,6 @@ loadAllOperations = function(libNames){
       allOps[op] = libOps[op]
       meta[lib].push(op)
     }
-
   }
   return [ allOps, meta ]
 }
@@ -61,6 +60,7 @@ client.on('message', msg => {
           msg.reply(result)
         })
         .catch(function(err) {
+          msg.reply(`your command met with a terrible fate and I nearly died. Have an admin check the logs plz`)
           console.log(`${execTime}: ERR: ${err}`)
         })
     } else if (cmd == 'help') {

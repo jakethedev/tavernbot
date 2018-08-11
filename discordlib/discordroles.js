@@ -5,30 +5,34 @@ exports.newrole = function(input, message, client) {
   if (input.toLowerCase() == 'help') return `help for newrole`
   if (!message.member) return `you don't even live here, stop messing with things (err: not a server member)`
   // if (message.member.permissions.includes 'icandothings'){
-  //   discord.addNewRole(name: input)
+  //   discord.addNewRole(name: input).copyFrom(everyone).randomColor()
   //   return `mission accomplished - your role called "${input}" is ready to rock`
   // }
   return `put that back, you're not allowed to touch it. (err: you don't have permission)`
 }
 
 //Given a rolename as input, add it to the requestor if it doesn't result in new privileges
-exports.putmein = async function(input, message, client) {
-  if (input.toLowerCase() == 'help') return `help for putmein`
+exports.giverole = exports.addrole = function(input, message, client) {
+  if (input.toLowerCase() == 'help') return `run !putmein aRoleGoesHere to `
   if (!input.trim()) return `you can't just add nothing as a role, that's not how any of this works!`
-  let expectedRoleName = input.toLowerCase() //Multiples caused me pain
+  let expectedRoleName = input.split(' ')[0].toLowerCase() //One at a time, not gonna try supporting multiple with this
+  // Allows us to add a role to someone, pinging them required
+  let requestorName = message.member.user.username
+  let optionalMention = message.mentions.members.first()
+  let targetMember = optionalMention ? optionalMention : message.member
+  let targetName = targetMember.user.username
   let roleToAdd = message.guild.roles.find((role) => expectedRoleName == role.name.toLowerCase())
-  console.log('Attempting to add ' + roleToAdd.name + ' to author...')
-  //TODO LOOK AT THE PROMISE API WTF IS HAPPENENING
-  let response = ''
-  return message.member.addRole(roleToAdd).then(result => {
-    // got final result
-    return `you have been added to ${roleToAdd.name}!`
+  if (!roleToAdd){
+    return `that role does not exist, checkest thy typing or speaketh with thy lord moderators`
+  }
+  console.log(`Role ${roleToAdd.name} requested by ${requestorName} for ${targetName}...`)
+  return targetMember.addRole(roleToAdd).then(result => {
+    // S'gooood. This is idempotent, adding an existing role id a-ok
+    return `${targetName} now has (or already had) the role ${roleToAdd.name}!`
   }).catch(err => {
-    // got error
-    return `things exploded and you have NOT been added to ${roleToAdd.name}!`
+    // Almost certainly a permission error
+    return `I can't add ${targetName} to ${roleToAdd.name}, probably not allowed to. Contact an admin if this is unexpected`
   });
-    // .then(`you have been added to ${roleToAdd.name}!`)
-    // .catch(`things exploded and you have NOT been added to ${roleToAdd.name}!`)
 }
 
 //List the requestor's roles.
@@ -54,14 +58,11 @@ exports.unrole = function(input, message, client) {
   if (userRoles.size == 0)
     return `it seems that you have no roles, and that's really funny`
   let roleResult = userRoles.find(role => role.name.toLowerCase() === input.toLowerCase())
-  if (!roleResult)
-    return `we cannot remove what does not exist (role "${input}" not found on your account)`
-
-  //TODO VERIFY THIS ROLE IS LOWER THAN BOT ROLE OR IT DIES. async promise this shit?
-  console.log(`Verify the role is below bot role or (chuckles) I'm in danger`)
-
-  message.member.removeRole(roleResult)
-  return `as you wish - you have cast thyself from the family of "${input}"!`
+  return message.member.removeRole(roleResult).then(result => {
+    return `you are uninvited from ${input}`
+  }).catch(error => {
+    return `I'm afraid I can't do that, Dave. Either you don't have that role or a mod needs to handle it`
+  })
 }
 
 //Number of people in a given role
@@ -94,33 +95,4 @@ exports.rolemembers = function(input = '', message, client) {
   } else {
     return 'there was a temporal anomaly, I believe I need my oil changed'
   }
-}
-
-samplecode = function() {
-  // get role by name
-  let myRole = message.guild.roles.find("name", "Moderators")
-
-  // assuming role.id is an actual ID of a valid role:
-  if (message.member.roles.has(role.id)) {
-    console.log(`Yay, the author of the message has the role!`)
-  } else {
-    console.log(`Nope, noppers, nadda.`)
-  }
-
-  //Other basics
-
-
-  // Let's pretend you mentioned the user you want to add a role to (!addrole @user Role Name):
-  let member = message.mentions.members.first()
-
-  // or the person who made the command: let member = message.member;
-
-  // Add the role!
-  member.addRole(role).catch(console.error)
-
-  message.guild.roles.find("name", "Moderators")
-  // Remove a role!
-  member.removeRole(role).catch(console.error)
-
-  //Docs https://anidiotsguide.gitbooks.io/discord-js-bot-guide/information/understanding-roles.html
 }

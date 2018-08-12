@@ -1,5 +1,5 @@
-// TO PROGRAMMERS: commands should have the signature:
-//    f(input:String, message:discord.js#message, client:discord.js#client)
+// See readme for more info, you can return raw data or a promise and the bot will reply
+//    with either the data or the resolution of the promise
 
 exports.newrole = function(input, message, client) {
   if (input.toLowerCase() == 'help') return `help for newrole`

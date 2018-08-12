@@ -14,9 +14,8 @@ loadAllOperations = function(libNames){
   }
   return [ allOps, meta ]
 }
-const [ commander, metadata ] = loadAllOperations(
-  [ './discordlib', './dungeonary', './gravemind' ]
-)
+const MODULES = [ './discordlib', './dungeonary', './gravemind' ]
+const [ commander, metadata ] = loadAllOperations(MODULES)
 
 // Core bot setup
 const { token, botkey, activeChannels, gameStatus } = require("./config.json")

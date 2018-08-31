@@ -15,7 +15,7 @@ validGames = {
 
 // Search function for available spell data per system.
 exports.spell = function(inputSpell, gameSystem = '5e') {
-  if (inputSpell.toLowerCase() == 'help') return `help for spellbook`
+  if (inputSpell.toLowerCase() == 'help') return `'spell name [optional game system]' will try to get you OGL info about the spell for your chosen game system (default: 5e)`
   if (!gameSystem in validGames) {
     return "Sorry, I currently only have SRD spell archives for: " + validGames.join(", ");
   }

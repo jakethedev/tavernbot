@@ -4,16 +4,21 @@ require('./randomUtil')
 // Dynamically load all operations we care about into a single commander object
 loadAllOperations = function(libNames){
   let allOps = {}, meta = {}
+  // Get each lib by name
   for (lib of libNames) {
     meta[lib] = []
     let libOps = require(lib);
     for (op in libOps) {
+      // Stash all op names at meta[libname] for help reference
       allOps[op] = libOps[op]
       meta[lib].push(op)
     }
+    // These will clobber eachother, this keeps them split up
+    meta[lib].helptext = libOps['helptext']()
   }
   return [ allOps, meta ]
 }
+// Always keep gravemind at the end
 const MODULES = [ './discordlib', './dungeonary', './gravemind' ]
 const [ commander, metadata ] = loadAllOperations(MODULES)
 
@@ -63,13 +68,18 @@ client.on('message', msg => {
           console.log(`${execTime}: ERR: ${err}`)
         })
     } else if (cmd == 'help') {
-      let fullHelp = `\n**- Available Commands -**`
+      let fullHelp = `these are my powers:`
+      // Each library is a string
       for (library in metadata){ // Already overloaded command, oops
-        fullHelp += `\n**${library} commands**: \n`
-        metadata[library].forEach((opName) => fullHelp += `${opName} `)
+        fullHelp += `\n**${metadata[library].helptext}**: \n` // Set in each lib's index.js, saved at :17
+        // meta[lib] is a list of ops in that lib
+        for (var opName of metadata[library]) {
+          if ((opName) != 'helptext')
+            fullHelp += `${opName}\n`
+        }
       }
-      fullHelp += `\n\nFor any command, run '!command help' for detailed use info`
-      fullHelp += `\n\n*If you notice something weird or broken, let me know, run* !feedback *to learn how*`
+      fullHelp += `\nFor any command, run '${botkey}command help' for detailed use info. `
+      fullHelp += `If you notice something weird or broken, run **${botkey}feedback** for support info`
       msg.channel.send(fullHelp)
     } else {
       console.log(`${execTime}: NOTICE: can't find ${cmd}(${input}) for ${msg.author.username}`)

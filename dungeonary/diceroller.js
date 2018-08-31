@@ -4,7 +4,7 @@ const mathOps = "+-"
 
 //For those tricky decisions
 exports.coin = function(input = 1) {
-  if (`${input}`.toLowerCase() == 'help') return `help for coin`
+  if (`${input}`.toLowerCase() == 'help') return `'coin [optional num of coins]' will flip as many coins as you want, up to as many coins as I have`
   if (isNaN(input) || input <= 1) {
     return 'the botcoin landed on ' + ['heads!', 'tails!'][randIntMinZero(1)]
   } else if (input > 1024) {
@@ -36,10 +36,10 @@ function diceRegexMatcher(rollInput) {
 }
 
 // The crazy custom roll parser. It's a good parser, and it deserves more composition, but mehhhh
-exports.dice = exports.d = exports.roll = function(rollInput = '') {
+exports.roll = function(rollInput = '') {
   //Handy simple default
   if (!rollInput) return "a d20 skitters across the table, you rolled a " + randIntMinOne(20)
-  if (rollInput == 'help') return `!dice XdY rolls a dY X times, you can segmentTotal varied dice, add constants, and comma separate rolls to have them all rolled at once!`
+  if (rollInput == 'help') return `'roll X, XdY, XdY +/- Z, XdY for stealth' - I can roll just about anything, make sure to use the XdY format, as 'roll 20' will just spit out 20. \nComments and subtraction as supported, and you can split up mutliple rolls with commas!`
 
   // Split up the input, regex-capture the right pieces, math them, and report the result
   let response = `here you go:\n`
@@ -83,8 +83,8 @@ exports.dice = exports.d = exports.roll = function(rollInput = '') {
 // Stat roller function. Uses an approved method and reports results cleanly
 // TODO This should go in a character gen lib eventually
 exports.rollstats = function(methodInput = '4d6k3') {
-  if (methodInput.toLowerCase() == 'help') return `help for stats`
   const validMethods = ['4d6k3', '2d6+6', 'colville', 'funnel', '3d6']
+  if (methodInput.toLowerCase() == 'help') return `'rollstats [method]' will give you a bunch of D&D-compatible stats, valid methods: [${validMethods.join(', ')}]`
   const method = validMethods.includes(methodInput) ? methodInput.toLowerCase() : validMethods[0]
   let stats = { 'STR': 0, 'DEX': 0, 'CON': 0, 'INT': 0, 'WIS': 0, 'CHA': 0 }
 

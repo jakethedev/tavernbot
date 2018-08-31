@@ -15,3 +15,4 @@ for (sublib of components) {
   }
   console.log(sublib + " loaded!")
 }
+exports.helptext = () => "RPG Helper (Dungeonary) Commands"

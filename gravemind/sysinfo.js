@@ -10,16 +10,11 @@ exports.version = function() {
   return response
 }
 
-// Util calls for the github issues link
-exports.bug = function() {
-  return `if you found a bug, please report it here: ${process.env.npm_package_bugs_url}`
+exports.feedback = function() {
+  return `got feedback, ideas, or bugs? Awesome! Let me know on github at ${process.env.npm_package_bugs_url}`
 }
 
-exports.feedback = exports.request = exports.feature = function() {
-  return `got a feature idea or some feedback? Awesome! Let me know here: ${process.env.npm_package_bugs_url}`
-}
-
-exports.stats = function() {
+exports.serverstats = function() {
   if (randIntMinOne(50) == 50) {
     return choice([`I have no memory of this place`, `get me out of here!`, `life's good, the kids are well. How are you?`, `there has been an anomaly`])
   } else {

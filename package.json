@@ -1,7 +1,7 @@
 {
   "name": "tavernbot",
-  "version": "0.2.3",
-  "releasenotes": "!serverstats is new, !help is much more readable, and every command with input has a help output (Help system complete)",
+  "version": "1.0.1",
+  "releasenotes": "!roles lists roles, and discordlib commands are much friendlier when slid into DMs ;)",
   "description": "A Dungeons and Dragons GM bot for discord, written in Node. This bot supports common tabletop RPG functionality, common Discord operations, and more",
   "main": "bot.js",
   "scripts": {

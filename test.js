@@ -6,7 +6,7 @@ I just wanted a way to continue bolting down code and ensuring it all
 works smoothly during intense construction and refactoring, and this
 is surprisingly maintainable for the moment.
 
-When it gets hairy, I'll bring in jasmine or another proper framework
+When it gets hairy, I'll bring on chai + mocha. Which will probably be soon.
 */
 
 
@@ -23,7 +23,7 @@ const {
 
 let msgs = [
   { "content": "!coin", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
-  { "content": "!d 20", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!coin 20", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
   { "content": "!hook", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
   { "content": "!hook low", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
   { "content": "!hook hi", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
@@ -39,12 +39,17 @@ let msgs = [
   { "content": "!rollstats colville", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
   { "content": "!rollstats funnel", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
   { "content": "!rollstats 3d6", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
-  { "content": "!dice", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
-  { "content": "!dice 1d20 + 5", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
-  { "content": "!dice 2d20 + 5", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
-  { "content": "!dice 50d20 + 2d6 + 9", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
-  { "content": "!dice 1d20, 3d6 + 5", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
-  { "content": "!dice 1d20 + 5 + 2d6, 9d8 + 1, d6 + d6 + d6 + d6", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } }
+  { "content": "!roll", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll 1d20 + 5", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll 2d20 + 5d4", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll 50d20 + d6 + 9", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll d6+d6+d6", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll -7+1d6", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll 1d6 for schwiiing", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll 1d20+5 to hit, 2d6+3 dmg, 1d6 poison, 1d20-1 con save", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll 49d32 + 3d6 + 9 + 7 - 2 for meteor shower", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll FIREBALL", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } },
+  { "content": "!roll 1d20 + 5 + 2d6, 9d8 + 1, d6 + d6 + d6 + d6", "author": { 'username': "testuser" }, "reply": console.log, "channel": { "name": "golemworks" } }
 ]
 
 for (msg of msgs) {

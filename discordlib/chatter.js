@@ -1,7 +1,7 @@
 require('../randomUtil')
 
 exports.sass = function(input, message) {
-  if (input.toLowerCase() == 'help') return `help for sass`
+  if (input.toLowerCase() == 'help') return `yeah, I bet you need help`
   let sassings = [
     `ain't nobody got time for sassposts`,
     `I don't get paid enough to sass you`,
@@ -19,7 +19,7 @@ exports.sass = function(input, message) {
 }
 
 exports.summon = function(input, message) {
-  if (input.toLowerCase() == 'help') return `help for summon`
+  if (input.toLowerCase() == 'help') return `'summon tag-a-user' will spontaneously generate a summoning circle for your user of choice`
   if (message.mentions.users) {
     if (message.mentions.users.size == 1) {
       let summoned = message.mentions.members.first()

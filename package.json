@@ -1,7 +1,7 @@
 {
   "name": "tavernbot",
-  "version": "0.2.0",
-  "releasenotes": "Recently updated: new origin of code at github/jakethedev - and I committed a git travesty, so idk what other changes are here",
+  "version": "1.0.1",
+  "releasenotes": "!roles lists roles, and discordlib commands are much friendlier when slid into DMs ;)",
   "description": "A Dungeons and Dragons GM bot for discord, written in Node. This bot supports common tabletop RPG functionality, common Discord operations, and more",
   "main": "bot.js",
   "scripts": {
@@ -45,6 +45,6 @@
     "node": ">=8.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.17.2"
+    "nodemon": "^1.18.4"
   }
 }

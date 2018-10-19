@@ -59,12 +59,10 @@ genCyberpunk = function() {
 }
 
 /****************************
- * End of the Generators
+ * End of the Generator funks
  ****************************/
 
-
-// Magic table of generators. We search through the keys of this to determine
-// which generator the user is trying to use
+// Magic table of generators for searchability
 const validSettings = {
   'highfantasy': genHighFantasy,
   'lowfantasy': genLowFantasy,
@@ -74,12 +72,11 @@ const validSettings = {
   'cyberpunk': genCyberpunk
 }
 
-// Default to high fantasy hooks, and prefix-search validSettings for the right generator.
-// So the user doesn't have to type '!cmd highfantasy' every time, just '!cmd hi'
+// Default to high fantasy hooks, and prefix-search validSettings for the right generator
 exports.hook = function(setting = '') {
   setting = (setting ? setting.toLowerCase() : 'highfantasy')
-  if (setting.toLowerCase() == 'help') return `help for hook`
   const validSettingNames = Object.keys(validSettings);
+  if (setting.toLowerCase() == 'help') return `'hook setting' will generate an appropriate adventure hook for you - valid settings: [${validSettingNames.join(', ')}] \nProtip: I'll match prefixes, so 'hook hi' will generate a high fantasy hook`
   let firstMatch = validSettingNames.filter((name) => name === setting || name.startsWith(setting))[0]
   if (!firstMatch || !validSettings[firstMatch]) {
     return "Sorry, I only have ideas for these settings: " + Object.keys(validSettings).join(", ") +

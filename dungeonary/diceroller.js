@@ -1,9 +1,10 @@
 //Requires that randomUtil has loaded already.
 require('../randomUtil')
+const mathOps = "+-"
 
 //For those tricky decisions
 exports.coin = function(input = 1) {
-  if (`${input}`.toLowerCase() == 'help') return `help for coin`
+  if (`${input}`.toLowerCase() == 'help') return `'coin [optional num of coins]' will flip as many coins as you want, up to as many coins as I have`
   if (isNaN(input) || input <= 1) {
     return 'the botcoin landed on ' + ['heads!', 'tails!'][randIntMinZero(1)]
   } else if (input > 1024) {
@@ -18,50 +19,72 @@ exports.coin = function(input = 1) {
   }
 }
 
-// The crazy custom roll parser.
-exports.dice = exports.d = function(rollInput = '') {
-  //Nice defaults
-  if (!rollInput) return "a d20 skitters across the table, you rolled a " + randIntMinOne(20)
-  rollInput = rollInput.toLowerCase()
-  if (rollInput == 'help') return `!dice XdY rolls a dY X times, you can sum varied dice, add constants, and comma separate rolls to have them all rolled at once!`
-  if (rollInput.includes('-')) return `sorry, reverse math is not supported yet`
+function diceRegexMatcher(rollInput) {
+  // Turns '1d20+5+ 1d6 - 3d4 for fighting' into
+  //      ['1d20', '+', '5', '+', '1d6', '-', '3d4']
+  let diceRegex = /(\d*d?\d+)|[-\+]/g
+  let matches = []
+  while (match = diceRegex.exec(rollInput)) {
+    if (mathOps.includes(match[0])){
+      // + and - are external to capture groups but need to be matched for math stuff
+      matches.push(match[0])
+    } else {
+      matches.push(match[1])
+    }
+  }
+  return matches
+}
 
-  rollInput = rollInput.replace(/\s/g, '') //Cut space, much easier to parse
-  let response = 'the dice have fallen...\n';
+// The crazy custom roll parser. It's a good parser, and it deserves more composition, but mehhhh
+exports.roll = function(rollInput = '') {
+  //Handy simple default
+  if (!rollInput) return "a d20 skitters across the table, you rolled a " + randIntMinOne(20)
+  if (rollInput == 'help') return `'roll X, XdY, XdY +/- Z, XdY for stealth' - I can roll just about anything, make sure to use the XdY format, as 'roll 20' will just spit out 20. \nComments and subtraction as supported, and you can split up mutliple rolls with commas!`
+
+  // Split up the input, regex-capture the right pieces, math them, and report the result
+  let response = `here you go:\n`
   for (rollSegment of rollInput.split(',')) {
-    //Smash response together with each result
-    let sum = 0
-    for (rollComponent of rollSegment.split('+')) {
-      if (rollComponent.split('d').length === 2) { //XdY or dY format
-        let [numRolls, diceSize] = rollComponent.split('d')
+    let diceMatches = diceRegexMatcher(rollSegment)
+    let segmentTotal = 0, subtractNextValue = false
+    for (rollValue of diceMatches) {
+      let tempSum = 0
+      // Can be one of '+', '-', 'XdY', or 'X'.
+      // If subtract, just note it for the next value.
+      if (rollValue == '-') {
+        subtractNextValue = true
+        continue
+      }
+      // The actual rolling of dice
+      if (rollValue.includes("d")) { //XdY or dY format
+        let [numRolls, diceSize] = rollValue.split('d')
         numRolls = numRolls ? parseInt(numRolls) : 1
         diceSize = parseInt(diceSize)
-        while (numRolls-- > 0) // Subtraction after comparison, trick from C
-          sum += randIntMinOne(diceSize)
-      } else if (!isNaN(rollComponent)) { // X format, crude yet effective
-        sum += parseInt(rollComponent)
-      } else {
-        return `there was a problem parsing '${rollComponent}', make sure that it's in XdY or X format`
+        while (numRolls-- > 0) // Subtraction happens after comparison
+          tempSum += randIntMinOne(diceSize)
+      } else if (rollValue.match(/^\d+$/)) { // A constant num
+        tempSum += parseInt(rollValue)
       }
+      // Complete subtract contract
+      if (subtractNextValue){
+        tempSum *= -1
+        subtractNextValue = false
+      }
+      segmentTotal += tempSum
     }
-    response += `${rollSegment}: **${sum}**\n`
+    response += `${diceMatches.join(' ')}: **${segmentTotal}**\n`
   }
-  /**
-   * Remaining potential here:
-   *    roll(2d20 - 5)                Multiple sub const
-   *    roll(2d20 - d6)               Multiple sub dice
-   *    roll(2d20 + 1d12 + 1d6 + 7 - 1d4)   Long series
+  /* Remaining potential:
    *    roll(2d20, best)              Multiple take best
    *    roll(2d20, worst)             Multiple take worst
    */
-  return response; // TODO: Parse input, roll dice, return reasonable output chunk
+  return response
 }
 
 // Stat roller function. Uses an approved method and reports results cleanly
 // TODO This should go in a character gen lib eventually
 exports.rollstats = function(methodInput = '4d6k3') {
-  if (methodInput.toLowerCase() == 'help') return `help for stats`
   const validMethods = ['4d6k3', '2d6+6', 'colville', 'funnel', '3d6']
+  if (methodInput.toLowerCase() == 'help') return `'rollstats [method]' will give you a bunch of D&D-compatible stats, valid methods: [${validMethods.join(', ')}]`
   const method = validMethods.includes(methodInput) ? methodInput.toLowerCase() : validMethods[0]
   let stats = { 'STR': 0, 'DEX': 0, 'CON': 0, 'INT': 0, 'WIS': 0, 'CHA': 0 }
 

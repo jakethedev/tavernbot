@@ -13,3 +13,4 @@ for (sublib of components) {
   }
   console.log(sublib + " loaded!")
 }
+exports['helptext'] = () => "Role and Chatter Commands"

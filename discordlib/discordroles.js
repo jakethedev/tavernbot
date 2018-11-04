@@ -13,7 +13,7 @@ exports.newrole = function(input, message, client) {
 }
 
 //Given a rolename as input, add it to the requestor if it doesn't result in new privileges
-exports.giverole = exports.addrole = function(input, message, client) {
+exports.giverole = function(input, message, client) {
   if (input.toLowerCase() == 'help') return `Usage: addrole/giverole 'the role name' will try to add the role to your user. Optionally, you can tag one person (after the role name) to attempt to give them the role`
   if (!input.trim()) return `you can't just add nothing as a role, that's not how any of this works!`
   let expectedRoleName = input.split('<')[0].toLowerCase().trim() //Expecting only one role, before any mentions
@@ -41,7 +41,7 @@ exports.giverole = exports.addrole = function(input, message, client) {
 }
 
 // List roles on the server that the bot can assign
-exports.roles = function(input, message, client) {
+exports.allroles = function(input, message, client) {
   if (input.toLowerCase() == 'help')
     return `'roles' will get you a list of the server roles that I can grant you`
   // If we're on a server, get them roles - reply intelligently in unhappy circumstances
@@ -59,8 +59,7 @@ exports.roles = function(input, message, client) {
   }
 }
 
-//List the requestor's roles.
-//TODO Use this, list a target's roles; let targetToSummon = message.mentions.users.first()
+//List the requestor's roles
 exports.myroles = function(input, message, client) {
   if (input.toLowerCase() == 'help') return `'myroles' will list all roles you have here`
   if (message.guild) {
@@ -101,9 +100,7 @@ exports.rolesize = function(input = '', message, client) {
   if (!input) return `give me a role and I'll give you an answer`
   if (input.toLowerCase() == 'help') return `'rolesize role-name' prints the size of a role - this might go away soon though`
   if (message.guild) {
-    //Make input easier to search with, comb the roles, and return the size of the role if it's found
-    input = input.trim().toLowerCase()
-    let roleResult = message.guild.roles.find(role => role.name.toLowerCase() === input)
+    let roleResult = getGuildRole(input, message)
     if (roleResult) {
       let roleCount = roleResult.members.size
       return `there are ${roleCount} members in ${roleResult.name}`
@@ -119,11 +116,27 @@ exports.rolesize = function(input = '', message, client) {
 exports.rolemembers = function(input = '', message, client) {
   if (!input) return `give me a role and I'll give you an answer`
   if (input.toLowerCase() == 'help') return `'rolemembers role-name' definitely doesn't list the members of a role`
-  if (message.guild) { //Docs recommend this check
-    //TODO Copy rolesize function but list names
-    return `under construction (the artificer hasn't finished this yet)`
+  if (message.guild) {
+    let role = getGuildRole(input, message)
+    if (role && role.members.size) {
+      let roleMemberList = role.members.map(m => m.displayName).join(', ')
+      return `${role.name} has the following members:\n${roleMemberList}`
+    } else if (role) {
+      return `${role.name} is a quiet, empty place with no members`
+    } else {
+      return `role '${input}' not found - I need the role's full name to get you a roll call`
+    }
   } else {
     return `run this command on a server with roles to get a more helpful response :)`
   }
 }
 
+////////////////////////////
+// Internal Helper Functions
+////////////////////////////
+
+// Takes in the name of a role and a discord message
+function getGuildRole(input, message) {
+  input = input.trim().toLowerCase()
+  return message.guild.roles.find(role => role.name.toLowerCase() === input)
+}

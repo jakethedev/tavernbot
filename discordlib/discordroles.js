@@ -47,8 +47,10 @@ exports.allroles = function(input, message, client) {
   // If we're on a server, get them roles - reply intelligently in unhappy circumstances
   if (message.guild) {
     const roleList = message.guild.roles
-                        .filter(role => !role.name.includes('@everyone'))
-                        .map(role => `'${role.name}'`).join(', ')
+                      .filter(role => !role.name.includes('@everyone'))
+                      .map(role => `'${role.name}'`)
+                      .sort()
+                      .join(', ')
     if(roleList) {
       return `a server has many roles:\n${roleList}`
     } else {

@@ -9,13 +9,13 @@ set -e
 #
 # I set mine for every 2 minutes with a daily log cleanup. Ex:
 # 
-# */2 *  *   *   * /path/to/your/updatescript.sh >> /var/log/botupdate.log 2>> /var/log/botupdate.log
+# */2 *  *   *   * /path/to/this/autoupdate.sh >> /var/log/botupdate.log 2>> /var/log/botupdate.log
 # 0 2 * * * rm /var/log/botupdate.log
 # 
-# - jakerunsdnd
+# - jakethedev
 ###################################
 
-cd /path/to/tavernbot
+cd /opt/tavernbot
 cp package.json package.old
 git pull > /dev/null 2> /dev/null
 diff -w package.old package.json || systemctl restart tavernbot

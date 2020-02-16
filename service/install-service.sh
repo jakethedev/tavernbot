@@ -12,7 +12,8 @@ sudo systemctl daemon-reload
 systemctl status tavernbot # It should say 'not loaded'
 sudo systemctl enable tavernbot
 sudo systemctl start tavernbot
-sudo journalctl -f 
+sleep 1
+sudo journalctl -xe
 # You should see healthy output and a logged-in message
 
 echo "Setting up logrotate"

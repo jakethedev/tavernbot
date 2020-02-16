@@ -1,7 +1,3 @@
-# Relevant crontab entries that I like to use. Modify as you see fit: the first
-#   cron keeps the bot up to date every two minutes, the bottom makes sure that
-#   log output doesnt nuke the box
+# Cron to keep the bot updated, only relevant if you like the idea of git-push deploying your code
 
-# m h  dom mon dow   command
-*/2 *  *   *   * /opt/tavernbot/autoupdate.sh >> /var/log/botupdate.log 2>> /var/log/botupdate.log
-0 2 * * * rm /var/log/botupdate.log
+*/2 *  *   *   * /opt/tavernbot/service/autoupdate.sh >> /var/log/botupdate.log 2>> /var/log/botupdate.log

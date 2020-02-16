@@ -1,7 +1,6 @@
 {
-  "token": "KEEP IT SECRET KEEP IT SAFE DON'T DO THAT EVER AGAIN",
+  "token": "hunter2",
   "botkey": "!",
-  "botRole": "Warforged",
   "activeChannels": ["golemworks", "bot"],
   "gameStatus": "tavernbot | !help for info"
 }

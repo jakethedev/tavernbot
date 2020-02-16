@@ -1,0 +1,11 @@
+/var/log/tavernbot.log {
+	rotate 2
+	daily
+	missingok
+	notifempty
+	compress
+	postrotate
+    systemctl restart tavernbot
+	endscript
+}
+

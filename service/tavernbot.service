@@ -6,7 +6,8 @@ After=network.target
 [Service]
 Type=simple
 Environment=NODE_ENV=production
-ExecStart=/usr/bin/node /opt/tavernbot/bot.js >> /var/log/tavernbot.log
+WorkingDirectory=/opt/tavernbot
+ExecStart=/usr/bin/node bot.js >> /var/log/tavernbot.log
 Restart=on-failure
 RestartSec=60s
 #Only available in systemd 236+

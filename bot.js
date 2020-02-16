@@ -1,5 +1,9 @@
-// For the occasional handy shortcut
+// Core bot setup
 require('./randomUtil')
+const fs = require('fs')
+const { token, botkey, activeChannels, gameStatus } = JSON.parse(fs.readFileSync('config.json', 'utf-8'))
+const discord = require("discord.js")
+const client = new discord.Client()
 
 // Dynamically load all operations we care about into a single commander object
 loadAllOperations = function(libNames){
@@ -21,11 +25,6 @@ loadAllOperations = function(libNames){
 // Always keep gravemind at the end
 const MODULES = [ './discordlib', './dungeonary', './gravemind' ]
 const [ commander, metadata ] = loadAllOperations(MODULES)
-
-// Core bot setup
-const { token, botkey, activeChannels, gameStatus } = require("./config.json")
-const discord = require("discord.js")
-const client = new discord.Client()
 
 // In case something happens, we'll want to see logs
 client.on("error", (e) => console.error(e))

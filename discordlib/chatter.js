@@ -2,20 +2,39 @@ require('../randomUtil')
 
 exports.sass = function(input, message) {
   if (input.toLowerCase() == 'help') return `yeah, I bet you need help`
+  let raresassings = [
+    `you just lost the game`,
+    `I wish you a lifetime of flowers that say "she loves me not"`,
+    `you're my favorite person besides every other person I've met`,
+    `ah, you scared me, that must be one of those faces that only a mother can love`,
+    `you're impossible to underestimate`,
+  ]
   let sassings = [
+    `seems to be up to no good, now I want to ban them from my neighborhood`,
+    `you smell like you sleep outside`,
+    `well aren't *you* delightful`,
+    `oh no, its you`,
+    `you know, you should probably be working`,
+    `sorry, I was distracted by your weird hair, what?`,
+    `I hope you get banned`,
+    `get lost`,
     `ain't nobody got time for sassposts`,
     `I don't get paid enough to sass you`,
-    `*don't you have a bot for that?*`,
+    `*don't you have an app for that?*`,
     `your father was an elderberry`,
     `your mother smelt of hamsters`,
-    `here, I gift you a sass. It is all yours now, take good care of it`,
-    `sass is the only dish on the menu and you just got spoonfed`,
-    `today's main course is sassage with a side of sassbrowns and you just got **served**`,
+    `sass is the only dish on the menu and you just got SERVED`,
+    `today's main course is sassage with a side of sassbrowns`,
     `and then, a good *sassing*!`,
     `I think we've had enough, check please`,
-    `it's like checkmate, jenga, yahtzee, touchdown, and a three-pointer all at once when I sass you`
+    `nah`
   ]
-  return choice(sassings)
+  let sassindex = randIntMinOne(1000)
+  if (sassindex < 20) {
+    return choice(raresassings) + ' /r'
+  } else {
+    return choice(sassings)
+  }
 }
 
 exports.summon = function(input, message) {

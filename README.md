@@ -1,7 +1,7 @@
 # TavernBot - The Ultimate RPG Discord Bot for D&D, Pathfinder, and beyond!
 ### [Ideas and Suggestions Welcome!](https://github.com/jakethedev/tavernbot/issues)
 
-The idea: Wouldn't it be hella dope to have a really good D&D bot for discord? I think so. And this is the start of that solution.
+The idea: Wouldn't it be great to have a really good D&D bot for discord? I think so. And this is the start of that solution.
 
 TavernBot is a generator bot for Game Masters of D&D. This project is a Discord bot wrapper for the [Dungeonary](https://www.npmjs.com/package/dungeonary), and several other useful discord functions such as roles and eventually music/ambience in a voice channel.
 

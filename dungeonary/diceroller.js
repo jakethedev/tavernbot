@@ -1,19 +1,19 @@
 //Requires that randomUtil has loaded already.
-require('../randomUtil')
+const rand = require('../randomUtil')
 const mathOps = "+-"
 
 //For those tricky decisions
 exports.coin = function(input = 1) {
   if (`${input}`.toLowerCase() == 'help') return `'coin [optional num of coins]' will flip as many coins as you want, up to as many coins as I have`
   if (isNaN(input) || input <= 1) {
-    return 'the botcoin landed on ' + ['heads!', 'tails!'][randIntMinZero(1)]
+    return 'the botcoin landed on ' + ['heads!', 'tails!'][rand.randIntMinZero(1)]
   } else if (input > 1024) {
     return `I don't get paid enough coin for that, I've got about a thousand copper in the bank`
   } else {
     let flipsDone = 0
     let results = [0, 0] //Same indexing as the faces array
     while (flipsDone++ < input) {
-      results[randIntMinZero(1)]++
+      results[rand.randIntMinZero(1)]++
     }
     return `we flipped a total of ${results[0]} heads and ${results[1]} tails`
   }
@@ -38,7 +38,7 @@ function diceRegexMatcher(rollInput) {
 // The crazy custom roll parser. It's a good parser, and it deserves more composition, but mehhhh
 exports.roll = function(rollInput = '') {
   //Handy simple default
-  if (!rollInput) return "a d20 skitters across the table, you rolled a " + randIntMinOne(20)
+  if (!rollInput) return "a d20 skitters across the table, you rolled a " + rand.randIntMinOne(20)
   if (rollInput == 'help') return `'roll X, XdY, XdY +/- Z, XdY for stealth' - I can roll just about anything, make sure to use the XdY format, as 'roll 20' will just spit out 20. \nComments and subtraction as supported, and you can split up mutliple rolls with commas!`
 
   // Split up the input, regex-capture the right pieces, math them, and report the result
@@ -60,7 +60,7 @@ exports.roll = function(rollInput = '') {
         numRolls = numRolls ? parseInt(numRolls) : 1
         diceSize = parseInt(diceSize)
         while (numRolls-- > 0) // Subtraction happens after comparison
-          tempSum += randIntMinOne(diceSize)
+          tempSum += rand.randIntMinOne(diceSize)
       } else if (rollValue.match(/^\d+$/)) { // A constant num
         tempSum += parseInt(rollValue)
       }
@@ -93,7 +93,7 @@ exports.rollstats = function(methodInput = '4d6k3') {
     for (const statName of Object.keys(stats)) {
       var lowest = 6
       for (var i = 0; i < 4; i++) {
-        singleRoll = randIntMinOne(6)
+        singleRoll = rand.randIntMinOne(6)
         lowest = singleRoll < lowest ? singleRoll : lowest
         stats[statName] += singleRoll
       }
@@ -101,12 +101,12 @@ exports.rollstats = function(methodInput = '4d6k3') {
     }
   } else if (method == '2d6+6') {
     for (const statName of Object.keys(stats))
-      stats[statName] += randIntMinOne(6) + randIntMinOne(6) + 6
+      stats[statName] += rand.randIntMinOne(6) + rand.randIntMinOne(6) + 6
   } else if (method == 'colville') {
     // Roll 4d6k3 until two 15+ stats have been achieved. This happens in order
   } else if (method == 'funnel' || method == '3d6') {
     for (const statName of Object.keys(stats))
-      stats[statName] += randIntMinOne(6) + randIntMinOne(6) + randIntMinOne(6)
+      stats[statName] += rand.randIntMinOne(6) + rand.randIntMinOne(6) + rand.randIntMinOne(6)
   }
 
   let [header, footer] = ['', '']

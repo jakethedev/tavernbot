@@ -1,7 +1,7 @@
 // Core bot setup
 require('./randomUtil')
 const fs = require('fs')
-const config = require('config.json')
+const config = require('./config')
 const discord = require("discord.js")
 const client = new discord.Client()
 

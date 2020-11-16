@@ -10,12 +10,12 @@ exports.randPosInt = randPosInt
 randIntMinOne = function(inclusiveMax) {
   return randPosInt(inclusiveMax, 1);
 }
-exports.randIntMinOne  = andIntMinOne 
+exports.randIntMinOne = randIntMinOne 
 
 randIntMinZero = function(inclusiveMax) {
   return randPosInt(inclusiveMax, 0);
 }
-exports.randIntMinZero  = rndIntMinZero 
+exports.randIntMinZero = randIntMinZero 
 
 randArrIdx = function(array) {
   if (array) {

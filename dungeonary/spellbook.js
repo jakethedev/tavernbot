@@ -1,4 +1,5 @@
 const spells5th = require('./5e/spells.json')
+const rand = require('../randomUtil')
 
 //First, we create a bunch of search functions. Then we map them to their systems in 'validGames'
 //On input, we can search for the system the user asks for, then if we have that system,

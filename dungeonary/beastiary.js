@@ -1,4 +1,5 @@
 const monsters5th = require('./5e/monsters.json')
+const rand = require('../randomUtil')
 
 validGames = {
   '5e': monsters5th

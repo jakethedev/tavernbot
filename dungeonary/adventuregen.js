@@ -1,5 +1,5 @@
 //Preload all the things
-require('../randomUtil')
+const rand = require('../randomUtil')
 const highFantasyData = require('./original/highFantasyArcs.json')
 //const lowFantasy... etc
 
@@ -9,17 +9,17 @@ const highFantasyData = require('./original/highFantasyArcs.json')
 genHighFantasy = function() {
   let data = highFantasyData;
   //Pick the actual stuff from the randomized input
-  let encLocation = choice(data.normal_places);
-  let npcs = shuffleArray(data.npcs);
-  let questnpcs = shuffleArray(npcs);
-  let informEvent = choice(data.npc_events);
-  let villainType = choice(data.villainTypes);
+  let encLocation = rand.choice(data.normal_places);
+  let npcs = rand.shuffleArray(data.npcs);
+  let questnpcs = rand.shuffleArray(npcs);
+  let informEvent = rand.choice(data.npc_events);
+  let villainType = rand.choice(data.villainTypes);
   let villain = data.villains[villainType];
   let vname = villain.name;
-  let vEvent = choice(villain['events']);
-  let quests = shuffleArray(villain['consequences']);
-  let vDxn = choice(data.compass);
-  let wildLoc = choice(data.wild_places);
+  let vEvent = rand.choice(villain['events']);
+  let quests = rand.shuffleArray(villain['consequences']);
+  let vDxn = rand.choice(data.compass);
+  let wildLoc = rand.choice(data.wild_places);
   //Throw it at the user
   let response = `<<< The Hook >>>
 When the party enters ${encLocation}, a ${questnpcs[0]} ${informEvent}.

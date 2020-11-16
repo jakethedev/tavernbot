@@ -1,7 +1,7 @@
 const os = require('os')
 const MBinB = 1048576
 const rand = require('../randomUtil')
-const config = require('../config.json')
+const config = require('../config')
 
 // Simple version, bug link, and release notes output
 exports.version = function() {

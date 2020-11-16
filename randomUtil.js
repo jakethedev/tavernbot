@@ -5,14 +5,17 @@
 randPosInt = function(inclusiveMax, min) {
   return Math.floor(Math.random() * (inclusiveMax - min + 1)) + min;
 }
+exports.randPosInt = randPosInt 
 
 randIntMinOne = function(inclusiveMax) {
   return randPosInt(inclusiveMax, 1);
 }
+exports.randIntMinOne  = andIntMinOne 
 
 randIntMinZero = function(inclusiveMax) {
   return randPosInt(inclusiveMax, 0);
 }
+exports.randIntMinZero  = rndIntMinZero 
 
 randArrIdx = function(array) {
   if (array) {
@@ -22,9 +25,10 @@ randArrIdx = function(array) {
     return NaN
   }
 }
+exports.randArrIdx = randArrIdx 
 
 // Give back a random item (or set of items) from a list
-choice = function(array = [], numChoices = 1) {
+exports.choice = function(array = [], numChoices = 1) {
   if (numChoices == 1) {
     let idx = randArrIdx(array)
     return array[idx]
@@ -41,7 +45,7 @@ choice = function(array = [], numChoices = 1) {
 
 //https://stackoverflow.com/a/12646864/6794180 - No native shuffle functions. Bummer.
 //Needed to smash up our data arrays for randomness
-shuffleArray = function(inputArray) {
+exports.shuffleArray = function(inputArray) {
   let array = inputArray.slice(0) //Quick clone
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));

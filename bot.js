@@ -1,7 +1,7 @@
 // Core bot setup
 require('./randomUtil')
 const fs = require('fs')
-const { token, botkey, activeChannels, gameStatus } = JSON.parse(fs.readFileSync('config.json', 'utf-8'))
+const config = require('config.json')
 const discord = require("discord.js")
 const client = new discord.Client()
 
@@ -36,10 +36,10 @@ client.on('ready', () => {
   } else {
     console.log(`NODE_ENV not set, running in dev mode`)
   }
-  console.log(`Tavernbot v${process.env.npm_package_version} has logged in as ${client.user.tag}!`)
+  console.log(`Tavernbot v${config.version} has logged in as ${client.user.tag}!`)
   client.user.setPresence({
     "status": "online",
-    "game": { "name": gameStatus }
+    "game": { "name": config.gameStatus }
   })
 })
 
@@ -47,8 +47,8 @@ client.on('ready', () => {
 client.on('message', msg => {
   // Contain the bot, and ensure we actually want to act on the command
   let channelName = msg.channel.name ? msg.channel.name.toLowerCase() : "NOT_A_CHANNEL_NAME"
-  if (activeChannels.includes(channelName) || msg.channel.recipient) {
-    if (!msg.content.trim().startsWith(botkey) || msg.author.bot) return
+  if (config.activeChannels.includes(channelName) || msg.channel.recipient) {
+    if (!msg.content.trim().startsWith(config.botkey) || msg.author.bot) return
     // Normalize input
     let parts = msg.content.trim().toLowerCase().substring(1).split(/\s+/)
     let cmd = parts[0]
@@ -77,8 +77,8 @@ client.on('message', msg => {
             fullHelp += `${opName}\n`
         }
       }
-      fullHelp += `\nFor any command, run '${botkey}command help' for detailed use info. `
-      fullHelp += `If you notice something weird or broken, run **${botkey}feedback** for support info`
+      fullHelp += `\nFor any command, run '${config.botkey}command help' for detailed use info. `
+      fullHelp += `If you notice something weird or broken, run **${config.botkey}feedback** for support info`
       msg.channel.send(fullHelp)
     } else {
       console.log(`${execTime}: NOTICE: can't find ${cmd}(${input}) for ${msg.author.username}`)
@@ -87,4 +87,4 @@ client.on('message', msg => {
 });
 
 // Turning the key and revving the bot engine
-client.login(token)
+client.login(config.token)

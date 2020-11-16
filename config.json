@@ -1,6 +1,9 @@
 {
+  "version": "1.1.2",
+  "releasenotes": "Light update for cleaner code, fixing some output issues",
+  "issuelink": "https://github.com/jakethedev/tavernbot/issues",
   "token": "hunter2",
   "botkey": "!",
-  "activeChannels": ["golemworks", "bot"],
+  "activeChannels": ["golemworks", "bot", "botspam"],
   "gameStatus": "tavernbot | !help for info"
 }

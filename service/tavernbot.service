@@ -7,9 +7,9 @@ After=network.target
 Type=simple
 Environment=NODE_ENV=production
 WorkingDirectory=/opt/tavernbot
-ExecStart=/usr/bin/node bot.js >> /var/log/tavernbot.log
+ExecStart=/usr/bin/node bot.js >> /opt/tavernbot/tavernbot.log
 Restart=on-failure
-RestartSec=60s
+RestartSec=10s
 #Only available in systemd 236+
 #StandardOutput=file:/var/log/bot.log
 #StandardError=file:/var/log/bot.err

@@ -1,4 +1,4 @@
-require('../randomUtil')
+const rand = require('../randomUtil')
 
 exports.sass = function(input, message) {
   if (input.toLowerCase() == 'help') return `yeah, I bet you need help`
@@ -31,9 +31,9 @@ exports.sass = function(input, message) {
   ]
   let sassindex = randIntMinOne(1000)
   if (sassindex < 20) {
-    return choice(raresassings) + ' /r'
+    return rand.choice(raresassings) + ' /r'
   } else {
-    return choice(sassings)
+    return rand.choice(sassings)
   }
 }
 

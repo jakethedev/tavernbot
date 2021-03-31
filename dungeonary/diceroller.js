@@ -12,6 +12,7 @@ exports.coin = function(input = 1) {
   } else {
     let flipsDone = 0
     let results = [0, 0] //Same indexing as the faces array
+    input = Math.min(input, 10000)
     while (flipsDone++ < input) {
       results[rand.randIntMinZero(1)]++
     }
@@ -59,6 +60,10 @@ exports.roll = function(rollInput = '') {
         let [numRolls, diceSize] = rollValue.split('d')
         numRolls = numRolls ? parseInt(numRolls) : 1
         diceSize = parseInt(diceSize)
+        // Nasty edgecase, simple solution
+        if (numRolls > 10000 || diceSize > 10000) {
+          return "Sorry, maximum value for a number of dice or sides is 10000 for performance reasons, please lower your expectations and try again"
+        }
         while (numRolls-- > 0) // Subtraction happens after comparison
           tempSum += rand.randIntMinOne(diceSize)
       } else if (rollValue.match(/^\d+$/)) { // A constant num

@@ -17,5 +17,5 @@ set -e
 
 cd /opt/tavernbot
 cp package.json package.old
-git pull > /dev/null 2> /dev/null
+git pull > gitpull.log
 diff -w package.old package.json || systemctl restart tavernbot

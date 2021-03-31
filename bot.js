@@ -1,7 +1,8 @@
 // Core bot setup
 require('./randomUtil')
 const fs = require('fs')
-const config = require('./config')
+const config = require('./config.json')
+const { token } = require('./.token.json')
 const discord = require("discord.js")
 const client = new discord.Client()
 
@@ -87,4 +88,4 @@ client.on('message', msg => {
 });
 
 // Turning the key and revving the bot engine
-client.login(config.token)
+client.login(token)
